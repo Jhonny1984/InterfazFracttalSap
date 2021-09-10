@@ -82,9 +82,9 @@ namespace ProInterfaceFracttal
 
             //GetCargaFracttalMonitores();
 
-               GetCargaFracttal();
+             //  GetCargaFracttal();
             /* LOGISTICA */
-           //   AddOrderToDatabase();
+            AddOrderToDatabase();
             //AddComplementsToDatabase();
 
           //  DraftToCocument();
@@ -3840,10 +3840,11 @@ namespace ProInterfaceFracttal
 
                /*FILTRA LAS REQUISICIONES DE INSUMOS ENVIADAS DESDE FRACTTAL */
                 {
-                    var ArticulosMovimiento = "  SELECT DISTINCT top 100  convert(nvarchar, [Code]) as code,U_Document1 ,[U_type_main], U_Date,U_parent_description  FROM[dbo].[@ORDENESFRACTTAL] (nolock)  " +
-                        " where[U_Document1] not in (Select U_Numero_Doc COLLATE SQL_Latin1_General_CP1_CI_AS FROM ODRF23L WHERE U_Numero_Doc IS NOT NULL and U_Numero_Doc<> '' )  " +
-                        " and U_parent_description like '%LOGISTICA%'" +
-                        " group by[code], U_Document1,[U_type_main], U_date, U_parent_description  order by U_Date desc ";
+                    var ArticulosMovimiento = "SELECT DISTINCT top 100  convert(nvarchar, [Code]) as code,U_Document1 ,[U_type_main], U_Date,U_parent_description  FROM[dbo].[@ORDENESFRACTTAL] (nolock)  " +
+                    " where[U_Document1] not in (Select U_Numero_Doc COLLATE SQL_Latin1_General_CP1_CI_AS FROM ODRF23L(nolock) WHERE U_Numero_Doc IS NOT NULL and U_Numero_Doc <> ''" +
+                    " and U_Numero_Doc = convert(nvarchar(20), U_Document1) COLLATE SQL_Latin1_General_CP1_CI_AS  )  " +
+                    " and U_parent_description like '%LOGISTICA%'" +
+                    " group by[code], U_Document1,[U_type_main], U_date, U_parent_description  order by U_Date desc";
                     conexion.Open();
                     SqlDataAdapter adaptador = new SqlDataAdapter(ArticulosMovimiento, conexion);
                     adaptador.Fill(solicitudes);
@@ -4199,19 +4200,7 @@ namespace ProInterfaceFracttal
                     Notas = Convert.ToString(solicitudes.Rows[x][9]).Trim();
 
 
-                    //TipoMantenimiento =  Convert.ToString(solicitudes.Rows[x][1]);
-
-                    //string TipoManto = TipoMantenimiento.Substring(0, 1).Replace("M", "X").Replace("NULL", "-").Trim() ;
-
-
-
-
-                    //if (TipoMantenimiento == "NULL")
-                    //{
-
-                    //    TipoMantenimiento = "-";
-
-                    //}
+                    
 
 
 
@@ -4372,24 +4361,13 @@ namespace ProInterfaceFracttal
                                 Console.WriteLine(lErrCode + "Error " + temp_string);
 
 
-                                ///
-                                /// Console.ReadKey();
-
-                                //MessageBox.Show(lErrCode + " " + sErrMsg); // Display error message
+                                
                             }
 
                         }
 
                      
-                        //else
-                        //{
-
-
-                        //    //cmdInvoice.Enabled = true; // Enable the "Make Invoice On Order" button
-                        //    //Interaction.MsgBox("Order Added to DataBase", MsgBoxStyle.Information, "Order Added");
-
-
-                        //}
+                       
 
 
                     }
