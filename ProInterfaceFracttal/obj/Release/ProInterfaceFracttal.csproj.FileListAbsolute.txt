@@ -1,0 +1,260 @@
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\ProInterfaceFracttal.exe.config
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\ProInterfaceFracttal.exe
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\ProInterfaceFracttal.pdb
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\envdte.dll
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\HawkNet.dll
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\Microsoft.AspNet.SignalR.Client.dll
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.OLE.Interop.dll
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.Shell.Interop.8.0.dll
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.Shell.Interop.dll
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.TextManager.Interop.8.0.dll
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.TextManager.Interop.dll
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\Newtonsoft.Json.dll
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\Pysco68.SignalR.HawkClient.dll
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\RestSharp.dll
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\stdole.dll
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\System.Net.Http.Extensions.dll
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\System.Net.Http.Formatting.dll
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\System.Net.Http.Primitives.dll
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\System.ValueTuple.dll
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\Thinktecture.IdentityModel.Hawk.dll
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\Microsoft.MSXML.dll
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\envdte.xml
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\Microsoft.AspNet.SignalR.Client.xml
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.OLE.Interop.xml
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.Shell.Interop.xml
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.Shell.Interop.8.0.xml
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.TextManager.Interop.xml
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.TextManager.Interop.8.0.xml
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\Newtonsoft.Json.xml
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\Pysco68.SignalR.HawkClient.pdb
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\System.Net.Http.Extensions.xml
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\System.Net.Http.Formatting.xml
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\System.Net.Http.Primitives.xml
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\System.ValueTuple.xml
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\Thinktecture.IdentityModel.Hawk.pdb
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\bin\Release\Thinktecture.IdentityModel.Hawk.dll.config
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\obj\Release\ProInterfaceFracttal.csproj.App.config
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\obj\Release\ProInterfaceFracttal.csprojResolveAssemblyReference.cache
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\obj\Release\ProInterfaceFracttal.exe
+C:\Users\JHONNY RUEDA\documents\visual studio 2017\Projects\ProInterfaceFracttal\ProInterfaceFracttal\obj\Release\ProInterfaceFracttal.pdb
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\ProInterfaceFracttal.exe.config
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\ProInterfaceFracttal.exe
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\ProInterfaceFracttal.pdb
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\envdte.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\HawkNet.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.AspNet.SignalR.Client.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.OLE.Interop.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.Shell.Interop.8.0.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.Shell.Interop.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.TextManager.Interop.8.0.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.TextManager.Interop.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.Win32.Primitives.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\Newtonsoft.Json.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\Pysco68.SignalR.HawkClient.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\RestSharp.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\stdole.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.AppContext.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Collections.Specialized.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.ComponentModel.Primitives.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.ComponentModel.TypeConverter.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Console.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Globalization.Calendars.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.IO.Compression.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.IO.Compression.ZipFile.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.IO.FileSystem.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.IO.FileSystem.Primitives.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Net.Http.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Net.Http.Extensions.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Net.Http.Formatting.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Net.Http.Primitives.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Net.Sockets.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Runtime.Serialization.Formatters.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Runtime.Serialization.Primitives.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Runtime.Serialization.Xml.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Security.Cryptography.Algorithms.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Security.Cryptography.Encoding.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Security.Cryptography.Primitives.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.ValueTuple.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\Thinktecture.IdentityModel.Hawk.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.MSXML.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\envdte.xml
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.AspNet.SignalR.Client.xml
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.OLE.Interop.xml
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.Shell.Interop.xml
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.Shell.Interop.8.0.xml
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.TextManager.Interop.xml
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.TextManager.Interop.8.0.xml
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\Newtonsoft.Json.xml
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\Pysco68.SignalR.HawkClient.pdb
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Diagnostics.DiagnosticSource.xml
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Net.Http.Extensions.xml
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Net.Http.Formatting.xml
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Net.Http.Primitives.xml
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\System.ValueTuple.xml
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\Thinktecture.IdentityModel.Hawk.pdb
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\bin\Release\Thinktecture.IdentityModel.Hawk.dll.config
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\obj\Release\ProInterfaceFracttal.csproj.App.config
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\obj\Release\Interop.MSScriptControl.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\obj\Release\Interop.SAPbobsCOM.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\obj\Release\Interop.Scripting.dll
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\obj\Release\ProInterfaceFracttal.csproj.ResolveComReference.cache
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\obj\Release\ProInterfaceFracttal.csproj.CoreCompileInputs.cache
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\obj\Release\ProInterfaceFracttal.csproj.CopyComplete
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\obj\Release\ProInterfaceFracttal.exe
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\obj\Release\ProInterfaceFracttal.pdb
+C:\Users\Gerente IT\Documents\interface-fracttal\ProInterfaceFracttal\obj\Release\ProInterfaceFracttal.csprojAssemblyReference.cache
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\ProInterfaceFracttal.exe.config
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\ProInterfaceFracttal.exe
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\ProInterfaceFracttal.pdb
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.Win32.Primitives.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\netstandard.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.AppContext.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Collections.Concurrent.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Collections.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Collections.NonGeneric.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Collections.Specialized.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.ComponentModel.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.ComponentModel.EventBasedAsync.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.ComponentModel.Primitives.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.ComponentModel.TypeConverter.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Console.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Data.Common.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Diagnostics.Contracts.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Diagnostics.Debug.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Diagnostics.FileVersionInfo.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Diagnostics.Process.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Diagnostics.StackTrace.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Diagnostics.TextWriterTraceListener.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Diagnostics.Tools.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Diagnostics.TraceSource.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Diagnostics.Tracing.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Drawing.Primitives.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Dynamic.Runtime.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Globalization.Calendars.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Globalization.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Globalization.Extensions.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.IO.Compression.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.IO.Compression.ZipFile.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.IO.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.IO.FileSystem.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.IO.FileSystem.DriveInfo.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.IO.FileSystem.Primitives.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.IO.FileSystem.Watcher.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.IO.IsolatedStorage.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.IO.MemoryMappedFiles.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.IO.Pipes.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.IO.UnmanagedMemoryStream.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Linq.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Linq.Expressions.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Linq.Parallel.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Linq.Queryable.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Net.Http.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Net.NameResolution.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Net.NetworkInformation.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Net.Ping.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Net.Primitives.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Net.Requests.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Net.Security.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Net.Sockets.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Net.WebHeaderCollection.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Net.WebSockets.Client.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Net.WebSockets.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.ObjectModel.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Reflection.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Reflection.Extensions.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Reflection.Primitives.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Resources.Reader.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Resources.ResourceManager.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Resources.Writer.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Runtime.CompilerServices.VisualC.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Runtime.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Runtime.Extensions.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Runtime.Handles.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Runtime.InteropServices.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Runtime.Numerics.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Runtime.Serialization.Formatters.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Runtime.Serialization.Json.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Runtime.Serialization.Primitives.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Runtime.Serialization.Xml.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Security.Claims.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Security.Cryptography.Algorithms.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Security.Cryptography.Csp.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Security.Cryptography.Encoding.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Security.Cryptography.Primitives.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Security.Cryptography.X509Certificates.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Security.Principal.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Security.SecureString.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Text.Encoding.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Text.Encoding.Extensions.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Text.RegularExpressions.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Threading.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Threading.Overlapped.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Threading.Tasks.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Threading.Tasks.Parallel.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Threading.Thread.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Threading.ThreadPool.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Threading.Timer.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.ValueTuple.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Xml.ReaderWriter.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Xml.XDocument.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Xml.XmlDocument.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Xml.XmlSerializer.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Xml.XPath.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Xml.XPath.XDocument.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Aspose.Email.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\envdte.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\HawkNet.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Mail.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\MailChimp.Net.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.AspNet.SignalR.Client.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.OLE.Interop.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.Shell.Interop.8.0.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.Shell.Interop.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.TextManager.Interop.8.0.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.TextManager.Interop.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Newtonsoft.Json.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Pysco68.SignalR.HawkClient.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\RestSharp.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\stdole.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Net.Http.Extensions.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Net.Http.Formatting.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Net.Http.Primitives.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Text.Encoding.CodePages.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Thinktecture.IdentityModel.Hawk.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.MSXML.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Aspose.Email.xml
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\envdte.xml
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Mail.xml
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.AspNet.SignalR.Client.xml
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.OLE.Interop.xml
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.Shell.Interop.xml
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.Shell.Interop.8.0.xml
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.TextManager.Interop.xml
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Microsoft.VisualStudio.TextManager.Interop.8.0.xml
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Newtonsoft.Json.xml
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Pysco68.SignalR.HawkClient.pdb
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Diagnostics.DiagnosticSource.xml
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Net.Http.Extensions.xml
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Net.Http.Formatting.xml
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\System.Net.Http.Primitives.xml
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Thinktecture.IdentityModel.Hawk.pdb
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\bin\Release\Thinktecture.IdentityModel.Hawk.dll.config
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\obj\Release\ProInterfaceFracttal.csproj.App.config
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\obj\Release\ProInterfaceFracttal.csprojAssemblyReference.cache
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\obj\Release\ProInterfaceFracttal.exe.config
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\obj\Release\Interop.MSScriptControl.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\obj\Release\Interop.SAPbobsCOM.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\obj\Release\Interop.Scripting.dll
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\obj\Release\ProInterfaceFracttal.csproj.ResolveComReference.cache
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\obj\Release\ProInterfaceFracttal.csproj.CopyComplete
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\obj\Release\ProInterfaceFracttal.exe
+C:\Users\Admin\Google Drive\interface-fracttal\ProInterfaceFracttal\obj\Release\ProInterfaceFracttal.pdb

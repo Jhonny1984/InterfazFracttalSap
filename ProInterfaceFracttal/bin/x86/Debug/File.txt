@@ -1,0 +1,493 @@
+
+Windows IP Configuration
+
+    vortex.data.microsoft.com
+    ----------------------------------------
+    Record Name . . . . . : vortex.data.microsoft.com
+    Record Type . . . . . : 5
+    Time To Live  . . . . : 91
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    CNAME Record  . . . . : asimov.vortex.data.microsoft.com.akadns.net
+
+
+    Record Name . . . . . : asimov.vortex.data.microsoft.com.akadns.net
+    Record Type . . . . . : 5
+    Time To Live  . . . . : 91
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    CNAME Record  . . . . : geo.vortex.data.microsoft.com.akadns.net
+
+
+    Record Name . . . . . : geo.vortex.data.microsoft.com.akadns.net
+    Record Type . . . . . : 5
+    Time To Live  . . . . : 91
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    CNAME Record  . . . . : bn2.vortex.data.microsoft.com.akadns.net
+
+
+    Record Name . . . . . : bn2.vortex.data.microsoft.com.akadns.net
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 91
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 65.55.44.109
+
+
+    beacons5.gvt2.com
+    ----------------------------------------
+    Record Name . . . . . : beacons5.gvt2.com
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 11842
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 104.237.191.1
+
+
+    11.226.90.38.in-addr.arpa
+    ----------------------------------------
+    Record Name . . . . . : 11.226.90.38.in-addr.arpa
+    Record Type . . . . . : 12
+    Time To Live  . . . . : 17062
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    PTR Record  . . . . . : 38-90-226-11.ptr.eset.com
+
+
+    mail.macizo.com.gt
+    ----------------------------------------
+    Record Name . . . . . : mail.macizo.com.gt
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 2077
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 108.163.171.122
+
+
+    141.1.0.128.in-addr.arpa
+    ----------------------------------------
+    Record Name . . . . . : 141.1.0.128.in-addr.arpa
+    Record Type . . . . . : 12
+    Time To Live  . . . . : 10161
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    PTR Record  . . . . . : core1-bucharest.web365.ro
+
+
+    az700632.vo.msecnd.net
+    ----------------------------------------
+    Record Name . . . . . : az700632.vo.msecnd.net
+    Record Type . . . . . : 5
+    Time To Live  . . . . : 2833
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    CNAME Record  . . . . : cs9.wpc.v0cdn.net
+
+
+    Record Name . . . . . : cs9.wpc.v0cdn.net
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 2833
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 72.21.81.200
+
+
+    play.google.com
+    ----------------------------------------
+    Record Name . . . . . : play.google.com
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 44
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 216.58.212.142
+
+
+    chat-pa.clients6.google.com
+    ----------------------------------------
+    Record Name . . . . . : chat-pa.clients6.google.com
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 22
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 108.177.126.95
+
+
+    132.15.151.186.in-addr.arpa
+    ----------------------------------------
+    Record Name . . . . . : 132.15.151.186.in-addr.arpa.
+    Record Type . . . . . : 12
+    Time To Live  . . . . : 86400
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    PTR Record  . . . . . : iisserver
+
+
+    i4.c.eset.com
+    ----------------------------------------
+    Record Name . . . . . : i4.c.eset.com
+    Record Type . . . . . : 5
+    Time To Live  . . . . : 11
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    CNAME Record  . . . . : i4.cwip.eset.com
+
+
+    Record Name . . . . . : i4.cwip.eset.com
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 11
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 91.228.166.52
+
+
+    Record Name . . . . . : i4.cwip.eset.com
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 11
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 91.228.166.45
+
+
+    202.194.151.186.in-addr.arpa
+    ----------------------------------------
+    Record Name . . . . . : 202.194.151.186.in-addr.arpa.
+    Record Type . . . . . : 12
+    Time To Live  . . . . : 86400
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    PTR Record  . . . . . : remotetablet
+
+
+    ssl.gstatic.com
+    ----------------------------------------
+    Record Name . . . . . : ssl.gstatic.com
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 15
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 172.217.17.131
+
+
+    remotetablet
+    ----------------------------------------
+    Record Name . . . . . : remotetablet
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 86400
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 186.151.194.202
+
+
+    remotetablet
+    ----------------------------------------
+    No records of type AAAA
+
+
+    beacons.gcp.gvt2.com
+    ----------------------------------------
+    Record Name . . . . . : beacons.gcp.gvt2.com
+    Record Type . . . . . : 5
+    Time To Live  . . . . : 162
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    CNAME Record  . . . . : beacons-handoff.gcp.gvt2.com
+
+
+    Record Name . . . . . : beacons-handoff.gcp.gvt2.com
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 162
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 108.177.126.94
+
+
+    afterlogic.com
+    ----------------------------------------
+    Record Name . . . . . : afterlogic.com
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 3695
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 64.150.188.238
+
+
+    evaluanet2.galileo.edu
+    ----------------------------------------
+    Record Name . . . . . : evaluanet2.galileo.edu
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 16148
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 200.9.255.96
+
+
+    iecvlist.microsoft.com
+    ----------------------------------------
+    Record Name . . . . . : iecvlist.microsoft.com
+    Record Type . . . . . : 5
+    Time To Live  . . . . : 2468
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    CNAME Record  . . . . : ie9comview.vo.msecnd.net
+
+
+    Record Name . . . . . : ie9comview.vo.msecnd.net
+    Record Type . . . . . : 5
+    Time To Live  . . . . : 2468
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    CNAME Record  . . . . : cs9.wpc.v0cdn.net
+
+
+    Record Name . . . . . : cs9.wpc.v0cdn.net
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 2468
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 72.21.81.200
+
+
+    221.107.126.209.in-addr.arpa
+    ----------------------------------------
+    Record Name . . . . . : 221.107.126.209.in-addr.arpa
+    Record Type . . . . . : 12
+    Time To Live  . . . . : 17059
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    PTR Record  . . . . . : relay-ca111041.net.anydesk.com
+
+
+    151.167.228.91.in-addr.arpa
+    ----------------------------------------
+    Record Name . . . . . : 151.167.228.91.in-addr.arpa
+    Record Type . . . . . : 12
+    Time To Live  . . . . : 17263
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    PTR Record  . . . . . : 91-228-167-151.ptr.eset.com
+
+
+    any-na.www.linkedin.com
+    ----------------------------------------
+    Record Name . . . . . : any-na.www.linkedin.com
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 15210
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 108.174.10.10
+
+
+    az667904.vo.msecnd.net
+    ----------------------------------------
+    Record Name . . . . . : az667904.vo.msecnd.net
+    Record Type . . . . . : 5
+    Time To Live  . . . . : 2186
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    CNAME Record  . . . . : cs9.wpc.v0cdn.net
+
+
+    Record Name . . . . . : cs9.wpc.v0cdn.net
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 2186
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 72.21.81.200
+
+
+    101.82.44.169.in-addr.arpa
+    ----------------------------------------
+    Record Name . . . . . : 101.82.44.169.in-addr.arpa
+    Record Type . . . . . : 12
+    Time To Live  . . . . : 6730
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    PTR Record  . . . . . : 65.52.2ca9.ip4.static.sl-reverse.com
+
+
+    iisserver
+    ----------------------------------------
+    No records of type AAAA
+
+
+    iisserver
+    ----------------------------------------
+    Record Name . . . . . : iisserver
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 86400
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 186.151.15.132
+
+
+    148.166.228.91.in-addr.arpa
+    ----------------------------------------
+    Record Name . . . . . : 148.166.228.91.in-addr.arpa
+    Record Type . . . . . : 12
+    Time To Live  . . . . : 14526
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    PTR Record  . . . . . : tsm10.eset.com
+
+
+    relay-ca111041.net.anydesk.com
+    ----------------------------------------
+    Record Name . . . . . : relay-ca111041.net.anydesk.com
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 9966
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 209.126.107.221
+
+
+    static-asm.secure.skypeassets.com
+    ----------------------------------------
+    Record Name . . . . . : static-asm.secure.skypeassets.com
+    Record Type . . . . . : 5
+    Time To Live  . . . . : 182
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    CNAME Record  . . . . : 1180c.wpc.azureedge.net
+
+
+    Record Name . . . . . : 1180c.wpc.azureedge.net
+    Record Type . . . . . : 5
+    Time To Live  . . . . : 182
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    CNAME Record  . . . . : 1180c.ec.azureedge.net
+
+
+    Record Name . . . . . : 1180c.ec.azureedge.net
+    Record Type . . . . . : 5
+    Time To Live  . . . . : 182
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    CNAME Record  . . . . : lb.apr-1180c.edgecastdns.net
+
+
+    Record Name . . . . . : lb.apr-1180c.edgecastdns.net
+    Record Type . . . . . : 5
+    Time To Live  . . . . : 182
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    CNAME Record  . . . . : cs10.wpc.v0cdn.net
+
+
+    Record Name . . . . . : cs10.wpc.v0cdn.net
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 182
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 93.184.215.201
+
+
+    gfwsl.geforce.com
+    ----------------------------------------
+    Record Name . . . . . : gfwsl.geforce.com
+    Record Type . . . . . : 5
+    Time To Live  . . . . : 1123
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    CNAME Record  . . . . : gfwsl.geforce.com.global.ogslb.com
+
+
+    Record Name . . . . . : gfwsl.geforce.com.global.ogslb.com
+    Record Type . . . . . : 5
+    Time To Live  . . . . : 1123
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    CNAME Record  . . . . : cs648.adn.phicdn.net
+
+
+    Record Name . . . . . : cs648.adn.phicdn.net
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 1123
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 152.195.55.22
+
+
+    mail.google.com
+    ----------------------------------------
+    Record Name . . . . . : mail.google.com
+    Record Type . . . . . : 5
+    Time To Live  . . . . : 239
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    CNAME Record  . . . . : googlemail.l.google.com
+
+
+    Record Name . . . . . : googlemail.l.google.com
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 239
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 172.217.17.101
+
+
+    google.com
+    ----------------------------------------
+    Record Name . . . . . : google.com
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 27
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 216.58.211.110
+
+
+    r3---sn-uxab05-b05l.googlevideo.com
+    ----------------------------------------
+    Record Name . . . . . : r3---sn-uxab05-b05l.googlevideo.com
+    Record Type . . . . . : 5
+    Time To Live  . . . . : 1063
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    CNAME Record  . . . . : r3.sn-uxab05-b05l.googlevideo.com
+
+
+    Record Name . . . . . : r3.sn-uxab05-b05l.googlevideo.com
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 1063
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 190.56.231.14
+
+
+    clients4.google.com
+    ----------------------------------------
+    Record Name . . . . . : clients4.google.com
+    Record Type . . . . . : 5
+    Time To Live  . . . . : 88
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    CNAME Record  . . . . : clients.l.google.com
+
+
+    Record Name . . . . . : clients.l.google.com
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 88
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 216.58.212.142
+
+
+    app.fracttal.com
+    ----------------------------------------
+    Record Name . . . . . : app.fracttal.com
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 62
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 104.20.248.77
+
+
+    Record Name . . . . . : app.fracttal.com
+    Record Type . . . . . : 1
+    Time To Live  . . . . : 62
+    Data Length . . . . . : 4
+    Section . . . . . . . : Answer
+    A (Host) Record . . . : 104.20.249.77
+
+

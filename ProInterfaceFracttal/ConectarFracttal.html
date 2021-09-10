@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Conectar con Fracttal</title>
+</head>
+<body>
+<script>$(function() {
+    var url = 'https://app.fracttal.com/api/work_orders_movements/';
+
+        var credentials = {
+            id: 'TLFmgX1Kuef4rsaNxk9z',
+            key: '0EIAQTJhtUvNqBAXkCserYjjRL7P6HP7WhIxBcf67aUynfWXrPCjyxU',
+            algorithm: 'sha256'
+        };
+
+        var req = {
+            method: 'GET',
+            url: url,
+            host: 'https://app.fracttal.com/api/',
+            port: 443
+        };
+
+        var credentialsFunc = function(id, callback) {
+            return callback(null, credentials);
+        };
+
+       // $("#execute").click(function() {
+
+            var header = hawk.client.header(url, req.method, { credentials: credentials });
+
+            $.ajax({
+                dataType: "json",
+                headers: { authorization: header.field },
+                url: url,
+                success: function(error, response, body) {
+
+                    var isValid = hawk.client.authenticate(body, credentials, header.artifacts, {
+                        message: 200,
+                        success: true
+                    });
+
+                    if (isValid) {
+                        $("#response").html(body.responseText);
+                    }
+                    else {
+                        $("#response").html("Error Response");
+                    }
+                }
+            });
+//});
+});</script>
+
+
+
+</body>
+</html>
