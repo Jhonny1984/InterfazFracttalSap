@@ -4126,6 +4126,17 @@ namespace ProInterfaceFracttal
         public static string TipoMantenimiento2 = "";
         public static void AddOrderToDatabase2()
         {
+
+            using (var progress = new ProgressBar())
+            {
+                for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
+                {
+                    progress.Report((double)i / 100);
+                    System.Threading.Thread.Sleep(50);
+                }
+            }
+
+
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("------------------------------------------");
             Console.WriteLine("--INICIANDO CARGA DE COTIZACION DE VENTA--");
@@ -4327,7 +4338,7 @@ namespace ProInterfaceFracttal
                         } while (!(i == Olineas.Rows.Count));                                            
                         OrdenApp.oOrder.Comments = "    OTS : " + DocNumOrders2 + "" +
                                                    "    SOLICITUD: " +Solicitud +
-                                                   "    Solicitante: " +Solicitante+
+                                                   "    SOLICITANTE: " +Solicitante+
                                                    "    LOCALIDAD: " + centroCosto + 
                                                    "    DEPARTAMENTO2: "+Departamento2 + 
                                                    "    ACTIVO: " +Activo+ 
