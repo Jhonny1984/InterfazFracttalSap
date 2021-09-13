@@ -857,7 +857,7 @@ namespace ProInterfaceFracttal
                 for (int h = 0; h <= /*TableC.Rows.Count*/100; h++)
                 {
                     progress.Report((double)h / 100);
-                    System.Threading.Thread.Sleep(50);
+                    System.Threading.Thread.Sleep(60);
                 }
             }
 
@@ -1515,7 +1515,7 @@ namespace ProInterfaceFracttal
                 for (int h = 0; h <= /*TableC.Rows.Count*/100; h++)
                 {
                     progress.Report((double)h / 100);
-                    System.Threading.Thread.Sleep(50);
+                    System.Threading.Thread.Sleep(60);
                 }
             }
 
@@ -1532,15 +1532,7 @@ namespace ProInterfaceFracttal
         }
 
 
-        public static void LoopGetfracttal() {
-
-
-
-           
-            GetCargaFracttal();
-            Environment.Exit(0);
-
-        }
+       
               
 
 
