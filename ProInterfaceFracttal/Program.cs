@@ -82,9 +82,9 @@ namespace ProInterfaceFracttal
 
             //GetCargaFracttalMonitores();
 
-             //  GetCargaFracttal();
+               GetCargaFracttal();
             /* LOGISTICA */
-            AddOrderToDatabase();
+    //        AddOrderToDatabase();
             //AddComplementsToDatabase();
 
           //  DraftToCocument();
