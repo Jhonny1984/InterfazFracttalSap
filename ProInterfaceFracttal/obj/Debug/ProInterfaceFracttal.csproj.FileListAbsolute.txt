@@ -506,9 +506,8 @@ E:\Archivos_Plus\interface-fracttal\ProInterfaceFracttal\obj\Debug\ProInterfaceF
 E:\Archivos_Plus\interface-fracttal\ProInterfaceFracttal\obj\Debug\ProInterfaceFracttal.exe
 E:\Archivos_Plus\interface-fracttal\ProInterfaceFracttal\obj\Debug\ProInterfaceFracttal.pdb
 E:\Archivos_Plus\interface-fracttal\ProInterfaceFracttal\obj\Debug\ProInterfaceFracttal.csproj.AssemblyReference.cache
-E:\Archivos_Plus\Git\InterfazFracttalSap\ProInterfaceFracttal\bin\Debug\ProInterfaceFracttal.exe.config
 E:\Archivos_Plus\Git\InterfazFracttalSap\ProInterfaceFracttal\bin\Debug\ProInterfaceFracttal.exe
-E:\Archivos_Plus\Git\InterfazFracttalSap\ProInterfaceFracttal\bin\Debug\ProInterfaceFracttal.pdb
+E:\Archivos_Plus\Git\InterfazFracttalSap\ProInterfaceFracttal\bin\Debug\ProInterfaceFracttal.exe.config
 E:\Archivos_Plus\Git\InterfazFracttalSap\ProInterfaceFracttal\bin\Debug\Microsoft.Win32.Primitives.dll
 E:\Archivos_Plus\Git\InterfazFracttalSap\ProInterfaceFracttal\bin\Debug\netstandard.dll
 E:\Archivos_Plus\Git\InterfazFracttalSap\ProInterfaceFracttal\bin\Debug\System.AppContext.dll
@@ -646,7 +645,6 @@ E:\Archivos_Plus\Git\InterfazFracttalSap\ProInterfaceFracttal\bin\Debug\System.N
 E:\Archivos_Plus\Git\InterfazFracttalSap\ProInterfaceFracttal\bin\Debug\Thinktecture.IdentityModel.Hawk.pdb
 E:\Archivos_Plus\Git\InterfazFracttalSap\ProInterfaceFracttal\bin\Debug\Thinktecture.IdentityModel.Hawk.dll.config
 E:\Archivos_Plus\Git\InterfazFracttalSap\ProInterfaceFracttal\obj\Debug\ProInterfaceFracttal.csproj.App.config
-E:\Archivos_Plus\Git\InterfazFracttalSap\ProInterfaceFracttal\obj\Debug\ProInterfaceFracttal.csproj.AssemblyReference.cache
 E:\Archivos_Plus\Git\InterfazFracttalSap\ProInterfaceFracttal\obj\Debug\ProInterfaceFracttal.exe.config
 E:\Archivos_Plus\Git\InterfazFracttalSap\ProInterfaceFracttal\obj\Debug\Interop.MSScriptControl.dll
 E:\Archivos_Plus\Git\InterfazFracttalSap\ProInterfaceFracttal\obj\Debug\Interop.SAPbobsCOM.dll
