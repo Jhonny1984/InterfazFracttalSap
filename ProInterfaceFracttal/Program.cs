@@ -68,37 +68,44 @@ namespace ProInterfaceFracttal
             //POSTItemsNuevos();
             //Mantenimiento industrial
             //POSTItemsNuevos2();
-
-
             //PutDatosFracttal();
-
             // PutDatosFracttal2();
-
             ////funcional 04072018 no tocar
             //RequisFracttal();  
-
-
             //PutCargaFracttal();
-
             //GetCargaFracttalMonitores();
 
-         //      GetCargaFracttal();
-            /* LOGISTICA */
-            AddOrderToDatabase();
-            //AddComplementsToDatabase();
 
-          //  DraftToCocument();
+/*-------------- Almacena OTs en base de datos desde Fracttal --------------*/
+              GetCargaFracttal();
 
-        ///    AddPurchaseOrder();
-         
-            ///*MANTENIMIENTO
-          // AddOrderToDatabase2();
-            //AddComplementsToDatabase2();
-            //AddPurchaseOrder2();
-            ///////// SANTA INES 
-            //AddOrderToDatabase3();
-            //AddComplementsToDatabase3();
-            //AddPurchaseOrder3();
+/*--------------------------------------------------------- LOGISTICA -------------------------------------------------------------------------*/
+//-------------- Carga OTs SAP LOGISTICA -----------------------------------
+            //  AddOrderToDatabase();
+//-------------- Carga OTs Complementos SAP LOGISTICA ----------------------
+            //  AddComplementsToDatabase();
+//-------------- Crea documentos de borrador a real SAP LOGISTICA ----------
+            //  DraftToCocument();
+//-------------- Crea solicitudes de compra SAP LOGISTICA ------------------
+            //  AddPurchaseOrder();
+
+
+/*-------------------------------------------------------- MANTENIMIENTO ----------------------------------------------------------------------*/
+//-------------- Carga OTs SAP MANTENIMIENTO -------------------------------
+            //  AddOrderToDatabase2();
+//-------------- Carga Complementos SAP MANTENIMIENTO ----------------------
+            //  AddComplementsToDatabase2();
+//-------------- Solicitudes de compra OTs SAP MANTENIMIENTO ---------------
+            //  AddPurchaseOrder2();
+
+
+/*--------------------------------------------------------- SANTA INES ------------------------------------------------------------------------*/
+//-------------- Carga OTs SAP Santa Ines ----------------------------------        
+            //  AddOrderToDatabase3();
+//-------------- Carga Complementos OTs SAP Santa Ines ---------------------
+            //  AddComplementsToDatabase3();
+//-------------- Solicitudes de compra OTs SAP Santa Ines ------------------
+            //  AddPurchaseOrder3();
 
 
 
@@ -4481,7 +4488,7 @@ namespace ProInterfaceFracttal
 
                     var ArticulosMovimiento = "SELECT  DISTINCT  convert(nvarchar, [Code]) as code " +
                         ",[U_type_main] FROM [DB_INTERFACE].[dbo].[ORDENESFRACTTAL] " +
-                        "WHERE[U_parent_description]  LIKE ltrim(rtrim('%MANTENIMIENTO INDUSTRIAL%') ) " +
+                        "WHERE[U_parent_description]  LIKE ltrim(rtrim('%MACIZO MANTENIMIENTO%') ) " +
                         "AND [U_parent_description]  LIKE ltrim(rtrim('%SANTA INES%') ) " +
                         "AND [U_ItemCode] != ''    order by 1 desc";
 

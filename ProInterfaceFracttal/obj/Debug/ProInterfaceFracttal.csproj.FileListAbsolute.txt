@@ -654,3 +654,4 @@ E:\Archivos_Plus\Git\InterfazFracttalSap\ProInterfaceFracttal\obj\Debug\ProInter
 E:\Archivos_Plus\Git\InterfazFracttalSap\ProInterfaceFracttal\obj\Debug\ProInterfaceFracttal.csproj.CopyComplete
 E:\Archivos_Plus\Git\InterfazFracttalSap\ProInterfaceFracttal\obj\Debug\ProInterfaceFracttal.exe
 E:\Archivos_Plus\Git\InterfazFracttalSap\ProInterfaceFracttal\obj\Debug\ProInterfaceFracttal.pdb
+C:\INTERFACES\Version actualizada\interface-fracttal\InterfazFracttalSap\ProInterfaceFracttal\obj\Debug\ProInterfaceFracttal.pdb
