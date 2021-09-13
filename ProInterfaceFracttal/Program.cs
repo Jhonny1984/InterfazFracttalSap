@@ -4047,11 +4047,24 @@ namespace ProInterfaceFracttal
                                 Console.WriteLine(lErrCode + "Error " + temp_string);
 
 
-                                ///
-                                /// Console.ReadKey();
 
-                                //MessageBox.Show(lErrCode + " " + sErrMsg); // Display error message
-                            }
+
+                            var infoO = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
+                            System.Diagnostics.Process.Start(infoO);
+
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("--------CERRANDO CARGA DE REQUERIMIENTOS SE ENCONTRO UN PROBLEMA EN LA CARGA A SAP-------");
+
+
+                            Environment.Exit(0);
+
+
+
+                            ///
+                            /// Console.ReadKey();
+
+                            //MessageBox.Show(lErrCode + " " + sErrMsg); // Display error message
+                        }
 
                         }
 
