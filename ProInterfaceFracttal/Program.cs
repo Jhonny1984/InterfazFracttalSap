@@ -3823,6 +3823,17 @@ namespace ProInterfaceFracttal
         public static string TipoMantenimiento = "";
         public static void AddOrderToDatabase()
         {
+
+            using (var progress = new ProgressBar())
+            {
+                for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
+                {
+                    progress.Report((double)i / 100);
+                    System.Threading.Thread.Sleep(50);
+                }
+            }
+
+
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("-----------------------------------------------");
             Console.WriteLine("--INICIANDO CARGA DE REQUISICIONES DE INSUMOS--");
