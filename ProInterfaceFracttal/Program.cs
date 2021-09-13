@@ -830,7 +830,7 @@ namespace ProInterfaceFracttal
             var portSuffix = uri.Port != 80 ? ":" + uri.Port : "";
             var host = uri.Host + portSuffix;
             var method = request.Method.ToString();
-
+            
             var header = Hawk.GetAuthorizationHeader(host, method, uri, _credential);
 
             request.AddHeader("Authorization", "Hawk " + header);
