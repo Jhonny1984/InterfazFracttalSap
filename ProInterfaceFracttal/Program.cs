@@ -1369,7 +1369,7 @@ namespace ProInterfaceFracttal
                     //Console.BackgroundColor = ConsoleColor.Magenta;
                     Console.ForegroundColor = ConsoleColor.Magenta;
                     //Console.WriteLine("BUSCANDO OPERACIONES DE MACIZO");
-                    Console.WriteLine("BUSCANDO OPERACIONES DE LOGISTICA");
+                    Console.WriteLine("BUSCANDO OPERACIONES DE MACIZO");
 
 
                     DataTable dtdfiltrado = new DataTable();
@@ -3241,7 +3241,7 @@ namespace ProInterfaceFracttal
                         command.Parameters.AddWithValue("@U_type_main", dt.Rows[i][12].ToString().Trim());
                         command.Parameters.AddWithValue("@U_parent_description", dt.Rows[i][14].ToString().Trim());
                         command.Parameters.AddWithValue("@Activo", dt.Rows[i][9].ToString().Trim());
-                        command.Parameters.AddWithValue("@costs_center_description", dt.Rows[i][16].ToString().Trim());
+                        command.Parameters.AddWithValue("@costs_center_description", dt.Rows[i][15].ToString().Trim());
                         command.Parameters.AddWithValue("@Department1", /*dt.Rows[i][17].ToString().Trim()*/Departamento.ToString().Trim());
                         //   command.Parameters.AddWithValue("@id_request", dt.Rows[i][17].ToString().Trim());
                         //command.Parameters.AddWithValue("@U_groups_2_description", dt.Rows[i][18].ToString().Trim());
