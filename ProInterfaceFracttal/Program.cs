@@ -77,7 +77,7 @@ namespace ProInterfaceFracttal
 
 
 /*-------------- Almacena OTs en base de datos desde Fracttal --------------*/
-              GetCargaFracttal();
+  //            GetCargaFracttal();
 
 /*--------------------------------------------------------- LOGISTICA -------------------------------------------------------------------------*/
 //-------------- Carga OTs SAP LOGISTICA -----------------------------------
@@ -1369,7 +1369,7 @@ namespace ProInterfaceFracttal
                     //Console.BackgroundColor = ConsoleColor.Magenta;
                     Console.ForegroundColor = ConsoleColor.Magenta;
                     //Console.WriteLine("BUSCANDO OPERACIONES DE MACIZO");
-                    Console.WriteLine("BUSCANDO OPERACIONES DE LOGISTICA");
+                    Console.WriteLine("BUSCANDO OPERACIONES DE MACIZO");
 
 
                     DataTable dtdfiltrado = new DataTable();
@@ -3241,7 +3241,7 @@ namespace ProInterfaceFracttal
                         command.Parameters.AddWithValue("@U_type_main", dt.Rows[i][12].ToString().Trim());
                         command.Parameters.AddWithValue("@U_parent_description", dt.Rows[i][14].ToString().Trim());
                         command.Parameters.AddWithValue("@Activo", dt.Rows[i][9].ToString().Trim());
-                        command.Parameters.AddWithValue("@costs_center_description", dt.Rows[i][16].ToString().Trim());
+                        command.Parameters.AddWithValue("@costs_center_description", dt.Rows[i][15].ToString().Trim());
                         command.Parameters.AddWithValue("@Department1", /*dt.Rows[i][17].ToString().Trim()*/Departamento.ToString().Trim());
                         //   command.Parameters.AddWithValue("@id_request", dt.Rows[i][17].ToString().Trim());
                         //command.Parameters.AddWithValue("@U_groups_2_description", dt.Rows[i][18].ToString().Trim());
@@ -4395,7 +4395,18 @@ namespace ProInterfaceFracttal
                                 Console.WriteLine(lErrCode + "Error " + temp_string);
 
 
-                                
+                                var infoO = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
+                                System.Diagnostics.Process.Start(infoO);
+
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("--------CERRANDO CARGA DE REQUERIMIENTOS-------");
+
+
+                                Environment.Exit(0);
+
+
+
+
                             }
 
                         }
@@ -4424,15 +4435,18 @@ namespace ProInterfaceFracttal
 
             }
 
-            //Environment.Exit(0);
 
-            //por el momento desabilitado por cambio de base 
-            //AddComplementsToDatabase();
+            var info = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
+            System.Diagnostics.Process.Start(info);
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("--------CERRANDO CARGA DE REQUERIMIENTOS-------");
 
 
-            //AddPurchaseOrder();
-        
-            //AddComplementsToDatabase2();
+            Environment.Exit(0);
+
+
+
         }
         /*-----------------------------------------------------------------------------------------------------------------------------------------------------------*/
         //Error handling variables
