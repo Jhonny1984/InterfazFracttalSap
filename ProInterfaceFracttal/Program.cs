@@ -77,7 +77,8 @@ namespace ProInterfaceFracttal
 
 
 /*-------------- Almacena OTs en base de datos desde Fracttal --------------*/
-                 GetCargaFracttal();
+                 
+            GetCargaFracttal();
 
 /*--------------------------------------------------------- LOGISTICA -------------------------------------------------------------------------*/
 //-------------- Carga OTs SAP LOGISTICA -----------------------------------
