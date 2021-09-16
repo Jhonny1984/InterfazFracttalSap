@@ -77,7 +77,7 @@ namespace ProInterfaceFracttal
 
 
 /*-------------- Almacena OTs en base de datos desde Fracttal --------------*/
-             GetCargaFracttal();
+                 GetCargaFracttal();
 
 /*--------------------------------------------------------- LOGISTICA -------------------------------------------------------------------------*/
 //-------------- Carga OTs SAP LOGISTICA -----------------------------------
@@ -87,12 +87,12 @@ namespace ProInterfaceFracttal
 //-------------- Crea documentos de borrador a real SAP LOGISTICA ----------
             //  DraftToCocument();
 //-------------- Crea solicitudes de compra SAP LOGISTICA ------------------
-              AddPurchaseOrder();
+            //  AddPurchaseOrder();
 
 
 /*-------------------------------------------------------- MANTENIMIENTO ----------------------------------------------------------------------*/
 //-------------- Carga OTs SAP MANTENIMIENTO -------------------------------
-//              AddOrderToDatabase2();
+            //  AddOrderToDatabase2();
 //-------------- Carga Complementos SAP MANTENIMIENTO ----------------------
             //  AddComplementsToDatabase2();
 //-------------- Solicitudes de compra OTs SAP MANTENIMIENTO ---------------
@@ -1382,7 +1382,7 @@ namespace ProInterfaceFracttal
 
 
                         /*PARA FILTRAR OPERACIONES DEPENDIENDO LA UNIDAD QUE LAS GENERA*/
-                        DataRow[] foundDT = dtDistinct.Select("parent_description like '%LOGISTICA%'");
+                        DataRow[] foundDT = dtDistinct.Select("parent_description like '%MACIZO%'");
 
 
 
@@ -4461,6 +4461,18 @@ namespace ProInterfaceFracttal
         public static string TipoMantenimiento3 = "";
         public static void AddOrderToDatabase3()
         {
+
+
+            using (var progress = new ProgressBar())
+            {
+                for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
+                {
+                    progress.Report((double)i / 100);
+                    System.Threading.Thread.Sleep(50);
+                }
+            }
+
+
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("------------------------------------------");
             Console.WriteLine("--INICIANDO CARGA DE COTIZACION DE VENTA--");
@@ -4675,6 +4687,16 @@ namespace ProInterfaceFracttal
                                 Console.WriteLine(lErrCode + "Error " + temp_string);
 
 
+                                var infoO = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
+                                System.Diagnostics.Process.Start(infoO);
+
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine("--------CERRANDO CARGA DE REQUERIMIENTOS-------");
+
+
+                                Environment.Exit(0);
+
+
                                 ///
                                 /// Console.ReadKey();
 
@@ -4721,6 +4743,15 @@ namespace ProInterfaceFracttal
 
 
             //AddPurchaseOrder();
+
+            var info = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
+            System.Diagnostics.Process.Start(info);
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("--------CERRANDO CARGA DE REQUERIMIENTOS-------");
+
+
+            Environment.Exit(0);
 
         }
 
