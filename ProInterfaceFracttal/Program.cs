@@ -77,7 +77,7 @@ namespace ProInterfaceFracttal
 
 
 /*-------------- Almacena OTs en base de datos desde Fracttal --------------*/
-  //            GetCargaFracttal();
+             GetCargaFracttal();
 
 /*--------------------------------------------------------- LOGISTICA -------------------------------------------------------------------------*/
 //-------------- Carga OTs SAP LOGISTICA -----------------------------------
@@ -87,12 +87,12 @@ namespace ProInterfaceFracttal
 //-------------- Crea documentos de borrador a real SAP LOGISTICA ----------
             //  DraftToCocument();
 //-------------- Crea solicitudes de compra SAP LOGISTICA ------------------
-            //  AddPurchaseOrder();
+              AddPurchaseOrder();
 
 
 /*-------------------------------------------------------- MANTENIMIENTO ----------------------------------------------------------------------*/
 //-------------- Carga OTs SAP MANTENIMIENTO -------------------------------
-              AddOrderToDatabase2();
+//              AddOrderToDatabase2();
 //-------------- Carga Complementos SAP MANTENIMIENTO ----------------------
             //  AddComplementsToDatabase2();
 //-------------- Solicitudes de compra OTs SAP MANTENIMIENTO ---------------
@@ -1378,11 +1378,11 @@ namespace ProInterfaceFracttal
                     if ((dtDistinct.Rows.Count) > 0)
                     {
 
-                        DataRow[] foundDT = dtDistinct.Select("parent_description like '%MACIZO%'");
+                        //DataRow[] foundDT = dtDistinct.Select("parent_description like '%MACIZO%'");
 
 
                         /*PARA FILTRAR OPERACIONES DEPENDIENDO LA UNIDAD QUE LAS GENERA*/
-                        //DataRow[] foundDT = dtDistinct.Select("parent_description like '%LOGISTICA%'");
+                        DataRow[] foundDT = dtDistinct.Select("parent_description like '%LOGISTICA%'");
 
 
 
@@ -3112,7 +3112,7 @@ namespace ProInterfaceFracttal
                     ",@U_completed_percenta" +
                     ",@U_code1" +
                     ",@U_personnel_descript" +
-                    ",@U_note" +
+                    ",SUBSTRING(@U_note,1, 150)" + // Rocortado a 150 caracteres 16092021
                     ",@U_movements_states_description )";
                 int contador2 = 0;
                 using (SqlCommand command = new SqlCommand(query2, conexion))
@@ -3134,7 +3134,7 @@ namespace ProInterfaceFracttal
                         command.Parameters.AddWithValue("@U_completed_percenta", dt.Rows[i][8].ToString().Trim());
                         command.Parameters.AddWithValue("@U_code1", dt.Rows[i][9].ToString().Trim());
                         command.Parameters.AddWithValue("@U_personnel_descript", dt.Rows[i][10].ToString().Trim());
-                        command.Parameters.AddWithValue("@U_note", dt.Rows[i][11].ToString().Trim());
+                        command.Parameters.AddWithValue("@U_note",  dt.Rows[i][11].ToString().Trim() );
                         command.Parameters.AddWithValue("@U_movements_states_description", dt.Rows[i][13].ToString().Trim());
                         //command.Parameters.AddWithValue("@parent_description", dt.Rows[i][14].ToString().Trim());
 
