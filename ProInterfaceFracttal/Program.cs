@@ -58,7 +58,7 @@ namespace ProInterfaceFracttal
             // PutSiteMacizo();
             //PutiteMacizo();
             //PutiteSantaInes();
-          //  PutiteTransflesa();
+            //  PutiteTransflesa();
 
             //PutCargaFracttalInventories();
 
@@ -76,19 +76,21 @@ namespace ProInterfaceFracttal
             //GetCargaFracttalMonitores();
 
 
-/*-------------- Almacena OTs en base de datos desde Fracttal --------------*/
-                 
-            //  GetCargaFracttal();
+            /*-------------- Almacena OTs en base de datos desde Fracttal --------------*/
+
+            GetCargaHoy.GetCargaFracttal();
+
+          ///    GetCargaFracttal();
 
 /*--------------------------------------------------------- LOGISTICA -------------------------------------------------------------------------*/
 //-------------- Carga OTs SAP LOGISTICA -----------------------------------
-              AddOrderToDatabase();
+ //             AddOrderToDatabase();
 //-------------- Carga OTs Complementos SAP LOGISTICA ----------------------
             //  AddComplementsToDatabase();
 //-------------- Crea documentos de borrador a real SAP LOGISTICA ----------
             //  DraftToCocument();
 //-------------- Crea solicitudes de compra SAP LOGISTICA ------------------
-            //  AddPurchaseOrder();
+//              AddPurchaseOrder();
 
 
 /*-------------------------------------------------------- MANTENIMIENTO ----------------------------------------------------------------------*/
@@ -852,6 +854,11 @@ namespace ProInterfaceFracttal
         public static void GetCargaFracttal() {
 
 
+
+            Console.ForegroundColor = ConsoleColor.Magenta;
+
+            Console.WriteLine("[INICIA LA CARGAR DE OTS DE DOS DIAS A TRAS]");
+
             using (
                var progress = new ProgressBar())
             {
@@ -1383,7 +1390,7 @@ namespace ProInterfaceFracttal
 
 
                         /*PARA FILTRAR OPERACIONES DEPENDIENDO LA UNIDAD QUE LAS GENERA*/
-                        DataRow[] foundDT = dtDistinct.Select("parent_description like '%MACIZO%'");
+                        DataRow[] foundDT = dtDistinct.Select("parent_description like '%LOGISTICA%'");
 
 
 
@@ -5438,13 +5445,14 @@ namespace ProInterfaceFracttal
 
                 {
                     var ArticulosMovimiento = "Select  Distinct top 15 [NumAtCard]" +
-                        "   , convert(int, U_Numero_Doc) as U_Numero_Doc" +
-                        "   , [Docdate]" +
-                        "   ,   [U_Vehiculo]" +
-                        "   ,    [Comments]" +
-                        "   ,   [U_Mecanico]" +
-                        "   ,   [U_JefeMecanica]" +
-                        "       FROM QUTATION_Y" +
+                        "   , convert(int, U_Numero_Doc) as U_Numero_Doc " +
+                        "   , [Docdate] " +
+                        "   ,   [U_Vehiculo] " +
+                        "   ,    [Comments] " +
+                        "   ,   [U_Mecanico] " +
+                        "   ,   [U_JefeMecanica] " +
+                        "       FROM QUTATION_Y " +
+                        "    where [NumAtCard] = '036362'" +
                         "   order by  convert(int, U_Numero_Doc) desc";
                     //var ArticulosMovimiento = "SELECT 08269";
                     conexion.Open();
@@ -5653,7 +5661,7 @@ namespace ProInterfaceFracttal
                         {
                             
                             progress.Report((double)l / solicitudes.Rows.Count);
-                            System.Threading.Thread.Sleep(50);
+                            System.Threading.Thread.Sleep(5);
 
                           
                         }

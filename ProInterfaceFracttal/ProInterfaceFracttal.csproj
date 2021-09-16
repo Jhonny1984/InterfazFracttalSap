@@ -213,6 +213,7 @@
     <Compile Include="Credentials.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="EnviaCorreo.cs" />
+    <Compile Include="GetCargaHoy.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Items.cs" />
     <Compile Include="list_items.cs" />
