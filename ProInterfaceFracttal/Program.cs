@@ -77,7 +77,7 @@ namespace ProInterfaceFracttal
 
 
 /*-------------- Almacena OTs en base de datos desde Fracttal --------------*/
-       //      GetCargaFracttal();
+                 GetCargaFracttal();
 
 /*--------------------------------------------------------- LOGISTICA -------------------------------------------------------------------------*/
 //-------------- Carga OTs SAP LOGISTICA -----------------------------------
@@ -87,7 +87,7 @@ namespace ProInterfaceFracttal
 //-------------- Crea documentos de borrador a real SAP LOGISTICA ----------
             //  DraftToCocument();
 //-------------- Crea solicitudes de compra SAP LOGISTICA ------------------
-      //        AddPurchaseOrder();
+            //  AddPurchaseOrder();
 
 
 /*-------------------------------------------------------- MANTENIMIENTO ----------------------------------------------------------------------*/
@@ -101,7 +101,7 @@ namespace ProInterfaceFracttal
 
 /*--------------------------------------------------------- SANTA INES ------------------------------------------------------------------------*/
 //-------------- Carga OTs SAP Santa Ines ----------------------------------        
-              AddOrderToDatabase3();
+            //  AddOrderToDatabase3();
 //-------------- Carga Complementos OTs SAP Santa Ines ---------------------
             //  AddComplementsToDatabase3();
 //-------------- Solicitudes de compra OTs SAP Santa Ines ------------------
