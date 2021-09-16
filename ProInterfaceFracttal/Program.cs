@@ -78,19 +78,19 @@ namespace ProInterfaceFracttal
 
             /*-------------- Almacena OTs en base de datos desde Fracttal --------------*/
 
-            GetCargaHoy.GetCargaFracttal();
+            //GetCargaHoy.GetCargaFracttal();
 
-          ///    GetCargaFracttal();
+           //  GetCargaFracttal();
 
 /*--------------------------------------------------------- LOGISTICA -------------------------------------------------------------------------*/
 //-------------- Carga OTs SAP LOGISTICA -----------------------------------
- //             AddOrderToDatabase();
+            //  AddOrderToDatabase();
 //-------------- Carga OTs Complementos SAP LOGISTICA ----------------------
             //  AddComplementsToDatabase();
 //-------------- Crea documentos de borrador a real SAP LOGISTICA ----------
             //  DraftToCocument();
 //-------------- Crea solicitudes de compra SAP LOGISTICA ------------------
-//              AddPurchaseOrder();
+              AddPurchaseOrder();
 
 
 /*-------------------------------------------------------- MANTENIMIENTO ----------------------------------------------------------------------*/
@@ -1390,7 +1390,7 @@ namespace ProInterfaceFracttal
 
 
                         /*PARA FILTRAR OPERACIONES DEPENDIENDO LA UNIDAD QUE LAS GENERA*/
-                        DataRow[] foundDT = dtDistinct.Select("parent_description like '%LOGISTICA%'");
+                        DataRow[] foundDT = dtDistinct.Select("parent_description like '%MACIZO%'");
 
 
 
@@ -5421,7 +5421,14 @@ namespace ProInterfaceFracttal
 
         public static void AddPurchaseOrder()
         {
-
+            using (var progress = new ProgressBar())
+            {
+                for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
+                {
+                    progress.Report((double)i / 100);
+                    System.Threading.Thread.Sleep(50);
+                }
+            }
             // Console.BackgroundColor = System.ConsoleColor.DarkMagenta;
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("------------------------------------------");
@@ -5444,7 +5451,7 @@ namespace ProInterfaceFracttal
                 //using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
 
                 {
-                    var ArticulosMovimiento = "Select  Distinct top 15 [NumAtCard]" +
+                    var ArticulosMovimiento = "Select  Distinct top 50 [NumAtCard]" +
                         "   , convert(int, U_Numero_Doc) as U_Numero_Doc " +
                         "   , [Docdate] " +
                         "   ,   [U_Vehiculo] " +
@@ -5452,7 +5459,7 @@ namespace ProInterfaceFracttal
                         "   ,   [U_Mecanico] " +
                         "   ,   [U_JefeMecanica] " +
                         "       FROM QUTATION_Y " +
-                        "    where [NumAtCard] = '036362'" +
+                      //  "    where [NumAtCard] = '036362'" +
                         "   order by  convert(int, U_Numero_Doc) desc";
                     //var ArticulosMovimiento = "SELECT 08269";
                     conexion.Open();
@@ -5661,7 +5668,7 @@ namespace ProInterfaceFracttal
                         {
                             
                             progress.Report((double)l / solicitudes.Rows.Count);
-                            System.Threading.Thread.Sleep(5);
+                            System.Threading.Thread.Sleep(20);
 
                           
                         }

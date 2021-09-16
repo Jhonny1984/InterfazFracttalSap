@@ -63,8 +63,8 @@ namespace ProInterfaceFracttal
             ///
             ///CAMBIAR DIA
             DateTime hoy = DateTime.Today;
-            DateTime diaini = (hoy.AddDays(-1));
-            DateTime diafin = (hoy.AddDays(0));
+            DateTime diaini = (hoy.AddDays(0));
+            DateTime diafin = (hoy.AddDays(1));
 
 
             DateTime DiaOrd = diaini.AddDays(0);
@@ -581,7 +581,7 @@ namespace ProInterfaceFracttal
 
 
                         /*PARA FILTRAR OPERACIONES DEPENDIENDO LA UNIDAD QUE LAS GENERA*/
-                        DataRow[] foundDT = dtDistinct.Select("parent_description like '%LOGISTICA%'");
+                        DataRow[] foundDT = dtDistinct.Select("parent_description like '%MACIZO%'");
 
 
 
