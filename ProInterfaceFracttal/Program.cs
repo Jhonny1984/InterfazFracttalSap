@@ -866,8 +866,8 @@ namespace ProInterfaceFracttal
             ///
             ///CAMBIAR DIA
             DateTime hoy = DateTime.Today;
-            DateTime diaini = (hoy.AddDays(0));
-            DateTime diafin = (hoy.AddDays(1));
+            DateTime diaini = (hoy.AddDays(-2));
+            DateTime diafin = (hoy.AddDays(0));
 
 
             DateTime DiaOrd = diaini.AddDays(0);
