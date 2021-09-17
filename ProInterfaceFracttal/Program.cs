@@ -90,12 +90,12 @@ namespace ProInterfaceFracttal
 //-------------- Crea documentos de borrador a real SAP LOGISTICA ----------
             //  DraftToCocument();
 //-------------- Crea solicitudes de compra SAP LOGISTICA ------------------
-       //       AddPurchaseOrder();
+            //  AddPurchaseOrder();
 
 
 /*-------------------------------------------------------- MANTENIMIENTO ----------------------------------------------------------------------*/
 //-------------- Carga OTs SAP MANTENIMIENTO -------------------------------
-          //   AddOrderToDatabase2();
+            //  AddOrderToDatabase2();
 //-------------- Carga Complementos SAP MANTENIMIENTO ----------------------
             //  AddComplementsToDatabase2();
 //-------------- Solicitudes de compra OTs SAP MANTENIMIENTO ---------------
