@@ -416,7 +416,7 @@ namespace ProInterfaceFracttal
                 datadistinct.Columns.Add("costs_center_description");
                 datadistinct.Columns.Add("id_request");
                 datadistinct.Columns.Add("groups_2_description");
-
+                datadistinct.Columns.Add("items_log_description");
 
                 var distinctRows = (from /*DataRow*/ dRow in dataTableLinqJoined.AsEnumerable().Distinct().ToList()
                                     orderby dRow.Field<string>("document1") descending
@@ -439,10 +439,11 @@ namespace ProInterfaceFracttal
                                         dRow.Field<string>("tasks_log_task_type_main"),//13
                                         dRow.Field<string>("movements_states_description"),//14
                                         dRow.Field<string>("parent_description"),//15
-                                        dRow.Field<string>("tasks_log_types_2_description"),
-                                        dRow.Field<string>("costs_center_description"), //16
-                                        dRow.Field<string>("id_request"),  //17
-                                        dRow.Field<string>("groups_2_description")  //18
+                                        dRow.Field<string>("tasks_log_types_2_description"),//16
+                                        dRow.Field<string>("costs_center_description"), //17
+                                        dRow.Field<string>("id_request"),  //18
+                                        dRow.Field<string>("groups_2_description"),  //19
+                                        dRow.Field<string>("items_log_description") //20
                                     }, false)).Distinct().ToList();
 
 
@@ -561,7 +562,7 @@ namespace ProInterfaceFracttal
 
                     DataTable dtDistinct = new DataTable();
 
-                    string[] sColumnas = { "folio_source", "date", "document1", "ItemCode", "items_description", "qty", "qty_pending", "unit_cost_company", "Completed_percentage", "code1", "personnel_description", "note", "tasks_log_task_type_main", "movements_states_description", "parent_description", /*"tasks_log_types_2_description",*/ "costs_center_description", "id_request"/*, "groups_2_description"*/ };
+                    string[] sColumnas = { "folio_source", "date", "document1", "ItemCode", "items_description", "qty", "qty_pending", "unit_cost_company", "Completed_percentage", "code1", "personnel_description", "note", "tasks_log_task_type_main", "movements_states_description", "parent_description", /*"tasks_log_types_2_description",*/ "costs_center_description", "id_request"/*, "groups_2_description"*/, "items_log_description" };
                     dtDistinct = TableC.DefaultView.ToTable(true, sColumnas);
 
 
@@ -985,7 +986,8 @@ namespace ProInterfaceFracttal
                     "[U_code1]," +
                     "[U_personnel_descript]," +
                     "[U_note], " +
-                    "[U_movements_states_description] " +
+                    "[U_movements_states_description], " +
+                    "[U_items_log_description] " +
                     ")" +
                     "VALUES" +
                     "(@Code" +
@@ -1001,7 +1003,8 @@ namespace ProInterfaceFracttal
                     ",@U_code1" +
                     ",@U_personnel_descript" +
                     ",SUBSTRING(@U_note,1, 150)" + // Rocortado a 150 caracteres 16092021
-                    ",@U_movements_states_description )";
+                    ",@U_movements_states_description " +
+                    ",@U_items_log_description )";
                 int contador2 = 0;
                 using (SqlCommand command = new SqlCommand(query2, conexion))
 
@@ -1024,6 +1027,10 @@ namespace ProInterfaceFracttal
                         command.Parameters.AddWithValue("@U_personnel_descript", dt.Rows[i][10].ToString().Trim());
                         command.Parameters.AddWithValue("@U_note", dt.Rows[i][11].ToString().Trim());
                         command.Parameters.AddWithValue("@U_movements_states_description", dt.Rows[i][13].ToString().Trim());
+                        command.Parameters.AddWithValue("@U_items_log_description", dt.Rows[i][17].ToString().Trim());
+
+
+                       
                         //command.Parameters.AddWithValue("@parent_description", dt.Rows[i][14].ToString().Trim());
 
                         int result = command.ExecuteNonQuery();

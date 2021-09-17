@@ -78,9 +78,9 @@ namespace ProInterfaceFracttal
 
             /*-------------- Almacena OTs en base de datos desde Fracttal --------------*/
 
-            //GetCargaHoy.GetCargaFracttal();
+           GetCargaHoy.GetCargaFracttal();
 
-           //  GetCargaFracttal();
+             GetCargaFracttal();
 
 /*--------------------------------------------------------- LOGISTICA -------------------------------------------------------------------------*/
 //-------------- Carga OTs SAP LOGISTICA -----------------------------------
@@ -90,12 +90,12 @@ namespace ProInterfaceFracttal
 //-------------- Crea documentos de borrador a real SAP LOGISTICA ----------
             //  DraftToCocument();
 //-------------- Crea solicitudes de compra SAP LOGISTICA ------------------
-              AddPurchaseOrder();
+       //       AddPurchaseOrder();
 
 
 /*-------------------------------------------------------- MANTENIMIENTO ----------------------------------------------------------------------*/
 //-------------- Carga OTs SAP MANTENIMIENTO -------------------------------
-            //  AddOrderToDatabase2();
+   //          AddOrderToDatabase2();
 //-------------- Carga Complementos SAP MANTENIMIENTO ----------------------
             //  AddComplementsToDatabase2();
 //-------------- Solicitudes de compra OTs SAP MANTENIMIENTO ---------------
@@ -5451,7 +5451,7 @@ namespace ProInterfaceFracttal
                 //using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
 
                 {
-                    var ArticulosMovimiento = "Select  Distinct top 50 [NumAtCard]" +
+                    var ArticulosMovimiento = "Select  Distinct top 30 [NumAtCard]" +
                         "   , convert(int, U_Numero_Doc) as U_Numero_Doc " +
                         "   , [Docdate] " +
                         "   ,   [U_Vehiculo] " +
