@@ -91,8 +91,8 @@ namespace ProInterfaceFracttal
 
             _credential = credential;
             //requisiciones
-            var client = new RestClient("https://app.fracttal.com/api/work_orders_movements/?since=" + añoini + "-" + mesini + "-" + diai + "T00:00:00-00&until=" + añofin + "-" + mesfin + "-" + diaf + "T00:00:00-00");
-            //    var client = new RestClient("https://app.fracttal.com/api/work_orders_movements/032627");
+          //  var client = new RestClient("https://app.fracttal.com/api/work_orders_movements/?since=" + añoini + "-" + mesini + "-" + diai + "T00:00:00-00&until=" + añofin + "-" + mesfin + "-" + diaf + "T00:00:00-00");
+                var client = new RestClient("https://app.fracttal.com/api/work_orders_movements/033838");
 
             var request = new RestRequest(Method.GET);
             Authenticate(client, request);

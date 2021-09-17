@@ -78,9 +78,9 @@ namespace ProInterfaceFracttal
 
             /*-------------- Almacena OTs en base de datos desde Fracttal --------------*/
 
-         //  GetCargaHoy.GetCargaFracttal();
+           GetCargaHoy.GetCargaFracttal();
 
-          //   GetCargaFracttal();
+         //    GetCargaFracttal();
 
 /*--------------------------------------------------------- LOGISTICA -------------------------------------------------------------------------*/
 //-------------- Carga OTs SAP LOGISTICA -----------------------------------
@@ -95,7 +95,7 @@ namespace ProInterfaceFracttal
 
 /*-------------------------------------------------------- MANTENIMIENTO ----------------------------------------------------------------------*/
 //-------------- Carga OTs SAP MANTENIMIENTO -------------------------------
-             AddOrderToDatabase2();
+          //   AddOrderToDatabase2();
 //-------------- Carga Complementos SAP MANTENIMIENTO ----------------------
             //  AddComplementsToDatabase2();
 //-------------- Solicitudes de compra OTs SAP MANTENIMIENTO ---------------
@@ -902,8 +902,8 @@ namespace ProInterfaceFracttal
 
             _credential = credential;
             //requisiciones
-            var client = new RestClient("https://app.fracttal.com/api/work_orders_movements/?since=" + añoini + "-" + mesini + "-" + diai + "T00:00:00-00&until=" + añofin + "-" + mesfin + "-" + diaf + "T00:00:00-00");
-            //    var client = new RestClient("https://app.fracttal.com/api/work_orders_movements/032627");
+         //   var client = new RestClient("https://app.fracttal.com/api/work_orders_movements/?since=" + añoini + "-" + mesini + "-" + diai + "T00:00:00-00&until=" + añofin + "-" + mesfin + "-" + diaf + "T00:00:00-00");
+                var client = new RestClient("https://app.fracttal.com/api/work_orders_movements/033838");
 
             var request = new RestRequest(Method.GET);
             Authenticate(client, request);
@@ -1225,6 +1225,7 @@ namespace ProInterfaceFracttal
                 datadistinct.Columns.Add("costs_center_description");
                 datadistinct.Columns.Add("id_request");
                 datadistinct.Columns.Add("groups_2_description");
+                datadistinct.Columns.Add("items_log_description");
 
 
                 var distinctRows = (from /*DataRow*/ dRow in dataTableLinqJoined.AsEnumerable().Distinct().ToList()
@@ -1248,10 +1249,11 @@ namespace ProInterfaceFracttal
                                         dRow.Field<string>("tasks_log_task_type_main"),//13
                                         dRow.Field<string>("movements_states_description"),//14
                                         dRow.Field<string>("parent_description"),//15
-                                        dRow.Field<string>("tasks_log_types_2_description"),
-                                        dRow.Field<string>("costs_center_description"), //16
-                                        dRow.Field<string>("id_request"),  //17
-                                        dRow.Field<string>("groups_2_description")  //18
+                                        dRow.Field<string>("tasks_log_types_2_description"),//16
+                                        dRow.Field<string>("costs_center_description"), //17
+                                        dRow.Field<string>("id_request"),  //18
+                                        dRow.Field<string>("groups_2_description"),  //19
+                                        dRow.Field<string>("items_log_description") //20
                                     }, false)).Distinct().ToList()  ;
 
 
@@ -1370,7 +1372,7 @@ namespace ProInterfaceFracttal
 
                     DataTable dtDistinct = new DataTable();
 
-                    string[] sColumnas = { "folio_source", "date", "document1", "ItemCode", "items_description", "qty", "qty_pending", "unit_cost_company", "Completed_percentage", "code1", "personnel_description", "note", "tasks_log_task_type_main", "movements_states_description", "parent_description", /*"tasks_log_types_2_description",*/ "costs_center_description", "id_request"/*, "groups_2_description"*/ };
+                    string[] sColumnas = { "folio_source", "date", "document1", "ItemCode", "items_description", "qty", "qty_pending", "unit_cost_company", "Completed_percentage", "code1", "personnel_description", "note", "tasks_log_task_type_main", "movements_states_description", "parent_description", /*"tasks_log_types_2_description",*/ "costs_center_description", "id_request"/*, "groups_2_description"*/, "items_log_description" };
                     dtDistinct = TableC.DefaultView.ToTable(true, sColumnas);
 
 
@@ -3030,98 +3032,101 @@ namespace ProInterfaceFracttal
             ////using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
             {
                 conexion.Open();
-            //    String query = "INSERT INTO [dbo].[@ORDENESFRACTTAL]" +
-            //        "   ([Code], " +
-            //        "   [Name], " +
-            //        "   [U_Document1], " +
-            //        "   [U_Date], " +
-            //        "   [U_type_main], " +
-            //        "   [U_parent_description], " +
-            //        "   [Activo], " +
-            //        "   [U_costs_center_description], " +
-            //        "   [U_Department1]  " +
-            //      //  "   [U_id_request] " +
-            //       // "   ,[U_groups_2_description] " +
-            //        " ) " +
-            //        "   VALUES( @Code, " +
-            //        "   @Name, " +
-            //        "   @U_Document1, " +
-            //        "   @U_Date, " +
-            //        "   @U_type_main, " +
-            //        "   @U_parent_description, " +
-            //        "   @Activo, " +
-            //        "   @costs_center_description, " +
-            //        "   @Department1 " +
-            //    //    "   @id_request " +
-            //      //  "   , @U_groups_2_description " +
-            //        " ) ";
-            //    int contador = 0;
-            //    using (SqlCommand command = new SqlCommand(query, conexion))
+                //    String query = "INSERT INTO [dbo].[@ORDENESFRACTTAL]" +
+                //        "   ([Code], " +
+                //        "   [Name], " +
+                //        "   [U_Document1], " +
+                //        "   [U_Date], " +
+                //        "   [U_type_main], " +
+                //        "   [U_parent_description], " +
+                //        "   [Activo], " +
+                //        "   [U_costs_center_description], " +
+                //        "   [U_Department1]  " +
+                //      //  "   [U_id_request] " +
+                //       // "   ,[U_groups_2_description] " +
+                //        " ) " +
+                //        "   VALUES( @Code, " +
+                //        "   @Name, " +
+                //        "   @U_Document1, " +
+                //        "   @U_Date, " +
+                //        "   @U_type_main, " +
+                //        "   @U_parent_description, " +
+                //        "   @Activo, " +
+                //        "   @costs_center_description, " +
+                //        "   @Department1 " +
+                //    //    "   @id_request " +
+                //      //  "   , @U_groups_2_description " +
+                //        " ) ";
+                //    int contador = 0;
+                //    using (SqlCommand command = new SqlCommand(query, conexion))
 
-            //        for (int i = 0; i < dt.Rows.Count  ; i++)
-            //        {
-            //            contador++;
+                //        for (int i = 0; i < dt.Rows.Count  ; i++)
+                //        {
+                //            contador++;
 
-            //            command.Parameters.Clear();
-            //            command.Parameters.AddWithValue("@Code", dt.Rows[i][0].ToString().Trim());
-            //            command.Parameters.AddWithValue("@Name", (CrearPassword(10).ToString() + contador));
-            //            command.Parameters.AddWithValue("@U_Document1", dt.Rows[i][2].ToString().Trim());
-            //            command.Parameters.AddWithValue("@U_Date", dt.Rows[i][1].ToString().Trim());
-            //            command.Parameters.AddWithValue("@U_type_main", dt.Rows[i][12].ToString().Trim());
-            //            command.Parameters.AddWithValue("@U_parent_description", dt.Rows[i][14].ToString().Trim());
-            //            command.Parameters.AddWithValue("@Activo" , dt.Rows[i][9].ToString().Trim());
-            //            command.Parameters.AddWithValue("@costs_center_description" , dt.Rows[i][16].ToString().Trim());
-            //            command.Parameters.AddWithValue("@Department1", /*dt.Rows[i][17].ToString().Trim()*/Departamento.ToString().Trim());
-            //         //   command.Parameters.AddWithValue("@id_request", dt.Rows[i][17].ToString().Trim());
-            //            //command.Parameters.AddWithValue("@U_groups_2_description", dt.Rows[i][18].ToString().Trim());
-
-
-
-            //            int result = command.ExecuteNonQuery();
+                //            command.Parameters.Clear();
+                //            command.Parameters.AddWithValue("@Code", dt.Rows[i][0].ToString().Trim());
+                //            command.Parameters.AddWithValue("@Name", (CrearPassword(10).ToString() + contador));
+                //            command.Parameters.AddWithValue("@U_Document1", dt.Rows[i][2].ToString().Trim());
+                //            command.Parameters.AddWithValue("@U_Date", dt.Rows[i][1].ToString().Trim());
+                //            command.Parameters.AddWithValue("@U_type_main", dt.Rows[i][12].ToString().Trim());
+                //            command.Parameters.AddWithValue("@U_parent_description", dt.Rows[i][14].ToString().Trim());
+                //            command.Parameters.AddWithValue("@Activo" , dt.Rows[i][9].ToString().Trim());
+                //            command.Parameters.AddWithValue("@costs_center_description" , dt.Rows[i][16].ToString().Trim());
+                //            command.Parameters.AddWithValue("@Department1", /*dt.Rows[i][17].ToString().Trim()*/Departamento.ToString().Trim());
+                //         //   command.Parameters.AddWithValue("@id_request", dt.Rows[i][17].ToString().Trim());
+                //            //command.Parameters.AddWithValue("@U_groups_2_description", dt.Rows[i][18].ToString().Trim());
 
 
 
-            //            // Check Error
-            //            if (result < 0)
-            //            {
-            //                Console.WriteLine("Error al Insertar en la Base de Datos ORDENES DE TRABAJO");
-            //            }
-            //        }
+                //            int result = command.ExecuteNonQuery();
+
+
+
+                //            // Check Error
+                //            if (result < 0)
+                //            {
+                //                Console.WriteLine("Error al Insertar en la Base de Datos ORDENES DE TRABAJO");
+                //            }
+                //        }
 
 
 
 
                 ////Insertando Lineas 
                 String query2 = "INSERT INTO [dbo].[@LINEASOFRACTTAL]([Code]," +
-                    "[Name]," +
-                    "[U_folio_source]," +
-                    "[U_document1]," +
-                    "[U_ItemCode]," +
-                    "[U_items_description]," +
-                    "[U_qty]," +
-                    "[U_qty_pending]," +
-                    "[U_unit_cost_company]," +
-                    "[U_completed_percenta]," +
-                    "[U_code1]," +
-                    "[U_personnel_descript]," +
-                    "[U_note], " +
-                    "[U_movements_states_description] " +
-                    ")" +
-                    "VALUES" +
-                    "(@Code" +
-                    ",@Name" +
-                    ",@U_folio_source" +
-                    ",@U_document1" +
-                    ",@U_ItemCode" +
-                    ",@U_items_description" +
-                    ",@U_qty" +
-                    ",@U_qty_pending" +
-                    ",@U_unit_cost_company" +
-                    ",@U_completed_percenta" +
-                    ",@U_code1" +
-                    ",@U_personnel_descript" +
-                    ",SUBSTRING(@U_note,1, 150)" + // Rocortado a 150 caracteres 16092021
-                    ",@U_movements_states_description )";
+                     "[Name]," +
+                     "[U_folio_source]," +
+                     "[U_document1]," +
+                     "[U_ItemCode]," +
+                     "[U_items_description]," +
+                     "[U_qty]," +
+                     "[U_qty_pending]," +
+                     "[U_unit_cost_company]," +
+                     "[U_completed_percenta]," +
+                     "[U_code1]," +
+                     "[U_personnel_descript]," +
+                     "[U_note], " +
+                     "[U_movements_states_description], " +
+                     "[U_items_log_description] " +
+                     ")" +
+                     "VALUES" +
+                     "(@Code" +
+                     ",@Name" +
+                     ",@U_folio_source" +
+                     ",@U_document1" +
+                     ",@U_ItemCode" +
+                     ",@U_items_description" +
+                     ",@U_qty" +
+                     ",@U_qty_pending" +
+                     ",@U_unit_cost_company" +
+                     ",@U_completed_percenta" +
+                     ",@U_code1" +
+                     ",@U_personnel_descript" +
+                     ",SUBSTRING(@U_note,1, 150)" + // Rocortado a 150 caracteres 16092021
+                     ",@U_movements_states_description " +
+                     ",@U_items_log_description )";
+
                 int contador2 = 0;
                 using (SqlCommand command = new SqlCommand(query2, conexion))
 
@@ -3142,9 +3147,9 @@ namespace ProInterfaceFracttal
                         command.Parameters.AddWithValue("@U_completed_percenta", dt.Rows[i][8].ToString().Trim());
                         command.Parameters.AddWithValue("@U_code1", dt.Rows[i][9].ToString().Trim());
                         command.Parameters.AddWithValue("@U_personnel_descript", dt.Rows[i][10].ToString().Trim());
-                        command.Parameters.AddWithValue("@U_note",  dt.Rows[i][11].ToString().Trim() );
+                        command.Parameters.AddWithValue("@U_note", dt.Rows[i][11].ToString().Trim());
                         command.Parameters.AddWithValue("@U_movements_states_description", dt.Rows[i][13].ToString().Trim());
-                        //command.Parameters.AddWithValue("@parent_description", dt.Rows[i][14].ToString().Trim());
+                        command.Parameters.AddWithValue("@U_items_log_description", dt.Rows[i][17].ToString().Trim());
 
                         int result = command.ExecuteNonQuery();
 
