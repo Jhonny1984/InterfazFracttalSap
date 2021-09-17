@@ -78,9 +78,9 @@ namespace ProInterfaceFracttal
 
             /*-------------- Almacena OTs en base de datos desde Fracttal --------------*/
 
-           GetCargaHoy.GetCargaFracttal();
+         //  GetCargaHoy.GetCargaFracttal();
 
-             GetCargaFracttal();
+          //   GetCargaFracttal();
 
 /*--------------------------------------------------------- LOGISTICA -------------------------------------------------------------------------*/
 //-------------- Carga OTs SAP LOGISTICA -----------------------------------
@@ -95,7 +95,7 @@ namespace ProInterfaceFracttal
 
 /*-------------------------------------------------------- MANTENIMIENTO ----------------------------------------------------------------------*/
 //-------------- Carga OTs SAP MANTENIMIENTO -------------------------------
-   //          AddOrderToDatabase2();
+             AddOrderToDatabase2();
 //-------------- Carga Complementos SAP MANTENIMIENTO ----------------------
             //  AddComplementsToDatabase2();
 //-------------- Solicitudes de compra OTs SAP MANTENIMIENTO ---------------
@@ -3822,6 +3822,7 @@ namespace ProInterfaceFracttal
         public static string Departamento2 = "";
         public static string centroCosto = "";
         public static string Activo = "";
+        public static string Flota = "";
         public static string Solicitud = "";
         public static string Solicitante = "";
         public static string Notas = "";
@@ -4184,7 +4185,8 @@ namespace ProInterfaceFracttal
                                               ",[U_groups_2_description]" +//6
                                               ",[Activo]" + //7
                                               ",[U_id_Request]" +//8
-                                              ",[U_note] "+ //9
+                                              ",[U_note] " + //9
+                                              ",[U_items_log_description]" + //10
                                               " FROM[DB_INTERFACE].[dbo].[V_ORDENESFRACTTAL]" +
                                               " WHERE[U_parent_description]" +
                                               " LIKE ltrim(rtrim('%// MACIZO MANTENIMIENTO%') ) " +
@@ -4219,6 +4221,7 @@ namespace ProInterfaceFracttal
                     Departamento2 = "";
                     centroCosto = "";
                     Activo = "";
+                    Flota = "";
                     Solicitud = "";
                     Notas = "";
                     Solicitante = "";
@@ -4238,6 +4241,7 @@ namespace ProInterfaceFracttal
                     centroCosto = Convert.ToString(solicitudes.Rows[x][2]).Trim();
                     Solicitante = Convert.ToString(solicitudes.Rows[x][3]).Trim();
                     Activo = Convert.ToString(solicitudes.Rows[x][7]).Trim();
+                    Flota = Convert.ToString(solicitudes.Rows[x][10]).Trim();
                     Solicitud = Convert.ToString(solicitudes.Rows[x][4]).Trim();
                     Notas = Convert.ToString(solicitudes.Rows[x][9]).Trim();
 
@@ -4349,6 +4353,7 @@ namespace ProInterfaceFracttal
                                                    "    LOCALIDAD: " + centroCosto + 
                                                    "    DEPARTAMENTO2: "+Departamento2 + 
                                                    "    ACTIVO: " +Activo+ 
+                                                   "    FLOTA: " +Flota+
                                                    "    NOTAS: " +Notas ;
 
                         //Comentamos para probar que solo cree una ves el documeto //lRetCode = OrdenApp.oOrder.Add(); // Try to add the orer to the database
