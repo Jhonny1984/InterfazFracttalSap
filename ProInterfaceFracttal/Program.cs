@@ -58,14 +58,14 @@ namespace ProInterfaceFracttal
             // PutSiteMacizo();
             //PutiteMacizo();
             //PutiteSantaInes();
-            //  PutiteTransflesa();
 
-            //PutCargaFracttalInventories();
+            // PutCargaFracttalInventories();
+            // PutCargaFracttalInventories();
 
             //TestBatches.ConectandoDB();
             ////TestBatches.BatchUpdate();
             ////L////
-            //POSTItemsNuevos();
+ 
             //Mantenimiento industrial
             //POSTItemsNuevos2();
             //PutDatosFracttal();
@@ -76,19 +76,25 @@ namespace ProInterfaceFracttal
             //GetCargaFracttalMonitores();
 
 
+      //      POSTItemsNuevos();
+
+ /* --------------crea codigos logistica y a la vez los actualiza-------------*/
+            
+   //         PutiteTransflesa();
+
             /*-------------- Almacena OTs en base de datos desde Fracttal --------------*/
 
-           GetCargaHoy.GetCargaFracttal();
+          //  GetCargaHoy.GetCargaFracttal();
 
-         //    GetCargaFracttal();
+          //   GetCargaFracttal();
 
 /*--------------------------------------------------------- LOGISTICA -------------------------------------------------------------------------*/
 //-------------- Carga OTs SAP LOGISTICA -----------------------------------
-            //  AddOrderToDatabase();
+              AddOrderToDatabase();
 //-------------- Carga OTs Complementos SAP LOGISTICA ----------------------
             //  AddComplementsToDatabase();
 //-------------- Crea documentos de borrador a real SAP LOGISTICA ----------
-            //  DraftToCocument();
+            //   DraftToCocument();
 //-------------- Crea solicitudes de compra SAP LOGISTICA ------------------
             //  AddPurchaseOrder();
 
@@ -201,7 +207,7 @@ namespace ProInterfaceFracttal
                         "field_2: '" + dataRow[0] + "'," +
                         "unit_code: '12'," +
                         "field_6: '" + dataRow[2] + "'," +
-                        "description: '' } };" +
+                        "description: '" + dataRow[1] + "' } };" +
                     "request(options, function(error, response, body) {" +
                     "if (error) throw new Error(error);" +
                     "console.log(body);" +
@@ -210,18 +216,20 @@ namespace ProInterfaceFracttal
                 proc3.StandardInput.WriteLine("setTimeout(function(){ process.exit();}, 1000).suppressOut;");
                 proc3.OutputDataReceived += proc_OutputDataReceivedPut;
 
+         //       proc3.StandardInput.WriteLine("Codigo: " );
+
                 proc3.WaitForExit();
                 //}
 
 
-                using (var progress = new ProgressBar())
-                {
-                    for (int h = 0; h <= tabla.Rows.Count; h++)
-                    {
-                        progress.Report((double)h / tabla.Rows.Count);
-                        System.Threading.Thread.Sleep(50);
-                    }
-                }
+                //using (var progress = new ProgressBar())
+                //{
+                //    for (int h = 0; h <= tabla.Rows.Count; h++)
+                //    {
+                //        progress.Report((double)h / tabla.Rows.Count);
+                //        System.Threading.Thread.Sleep(50);
+                //    }
+                //}
 
 
             }
@@ -902,8 +910,8 @@ namespace ProInterfaceFracttal
 
             _credential = credential;
             //requisiciones
-         //   var client = new RestClient("https://app.fracttal.com/api/work_orders_movements/?since=" + añoini + "-" + mesini + "-" + diai + "T00:00:00-00&until=" + añofin + "-" + mesfin + "-" + diaf + "T00:00:00-00");
-                var client = new RestClient("https://app.fracttal.com/api/work_orders_movements/033838");
+            var client = new RestClient("https://app.fracttal.com/api/work_orders_movements/?since=" + añoini + "-" + mesini + "-" + diai + "T00:00:00-00&until=" + añofin + "-" + mesfin + "-" + diaf + "T00:00:00-00");
+          //      var client = new RestClient("https://app.fracttal.com/api/work_orders_movements/036491");
 
             var request = new RestRequest(Method.GET);
             Authenticate(client, request);
@@ -2757,10 +2765,19 @@ namespace ProInterfaceFracttal
 
         }
 
-
+        /* --------------crea codigos logistica y a la vez los actualiza-------------*/
         public static void PutiteTransflesa()
         //public static void PutSiteMacizo()
         {
+            using (var progress = new ProgressBar())
+            {
+                for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
+                {
+                    progress.Report((double)i / 100);
+                    System.Threading.Thread.Sleep(25);
+                }
+            }
+
 
             DataTable dataitems = new DataTable();
             using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBTran + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
@@ -2769,6 +2786,7 @@ namespace ProInterfaceFracttal
             {
                 // var ArticulosMovimiento = "select  * from INVENTARIOS where Codigo between 'VARIOS1831' and 'VARIOS1906'";
                 var ArticulosMovimiento = "SELECT [ItemCode],[ItemName],[ItmsGrpNam],[CreateDate],[LastPurPrc],[InvntryUom],[OnHand] FROM [dbo].[V_ArticulosNuevos]";
+               
                 conexion.Open();
                 SqlDataAdapter adaptador = new SqlDataAdapter(ArticulosMovimiento, conexion);
                 adaptador.Fill(dataitems);
@@ -2833,7 +2851,7 @@ namespace ProInterfaceFracttal
 
             request.AddHeader("Content-Type", "application/json");
             // request.AddParameter("undefined", "{\n    \"date\": \"2019-07-22T21:00:00-03\",\n    \"value\": 1,\n    \"serial\": \"100\"\n}", ParameterType.RequestBody);
-            request.AddParameter("undefined", "{\n \"code\": \"" + itemcode + "\",  \"field_1\": \"" + descripcion + "\",\n  \"field_2\": \"" + itemcode + "\",\n  \"field_3\": \"\",\n  \"field_4\": \"\",\n  \"field_5\": \"\",\n  \"field_6\": \"\",\n  \"id_warehouse\": 11,\n  \"location\": \"// LOGISTICA/\",\n  \"max_stock_level\": 2,\n  \"min_stock_level\": 0,\n  \"reorder_level\": 1,\n  \"stock\": \"" + stock + "\",\n  \"stock_temp\": 0,\n  \"unit_cost_stock\": " + costo + "\n, \"unit_code\": 12\n}", ParameterType.RequestBody);
+            request.AddParameter("undefined", "{\n \"code\": \"" + itemcode + "\",\n  \"field_1\": \"" + descripcion + "\",\n  \"field_2\": \"" + itemcode + "\",\n  \"field_3\": \"\",\n  \"field_4\": \"\",\n  \"field_5\": \"\",\n  \"field_6\": \"\",\n  \"id_warehouse\": 11,\n  \"location\": \"// LOGISTICA/\",\n  \"max_stock_level\": 2,\n  \"min_stock_level\": 0,\n  \"reorder_level\": 1,\n  \"stock\": \"" + stock + "\",\n  \"stock_temp\": 0,\n  \"unit_cost_stock\": " + costo + "\n, \"unit_code\": 12\n}", ParameterType.RequestBody);
 
 
             //            request.AddParameter("\"" + "Date\":" + "\"" + "2019-07-06T00:00:00-05\""+"," + "\"" + "value\":"+"2"+"," + "\"" + "serial\":"+"\""+"100\"" , ParameterType.RequestBody);
@@ -2843,9 +2861,16 @@ namespace ProInterfaceFracttal
             Console.ForegroundColor = ConsoleColor.Red;
             Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Codigo: " + itemcode);
+            Console.WriteLine("Descripcion: " + descripcion);
+            
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Estado: ");
             Console.WriteLine(jsonResponse);
             Console.ResetColor();
             //Console.ReadKey();
+
+            
 
 
         }
@@ -3441,6 +3466,30 @@ namespace ProInterfaceFracttal
                 Console.WriteLine("Problemas en la conexion presiones una tecla");
                 Console.ReadKey();
 
+
+/* -------------------------------------- ACTUALIZACION DE ERROR -------------------------------------*/
+                var infoO = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
+                System.Diagnostics.Process.Start(infoO);
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("--------CERRANDO APLICACION POR ERROR Y VOLVIENDO A INICIAR-------");
+
+                Environment.Exit(0);
+
+                using (var progress = new ProgressBar())
+                {
+                    for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
+                    {
+                        progress.Report((double)i / 100);
+                        System.Threading.Thread.Sleep(50);
+                    }
+                }
+
+
+
+                Environment.Exit(0);
+
+
                 return;
             }
 
@@ -3454,6 +3503,25 @@ namespace ProInterfaceFracttal
                 //MessageBox.Show(sErrMsg + " Error 5000");
                 Console.WriteLine("Problemas en la conexion presiones una tecla");
                 Console.ReadKey();
+/* -------------------------------------- ACTUALIZACION DE ERROR -------------------------------------*/
+                var infoO = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
+                System.Diagnostics.Process.Start(infoO);
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("--------CERRANDO APLICACION POR ERROR Y VOLVIENDO A INICIAR-------");
+
+                Environment.Exit(0);
+
+                using (var progress = new ProgressBar())
+                {
+                    for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
+                    {
+                        progress.Report((double)i / 100);
+                        System.Threading.Thread.Sleep(50);
+                    }
+                }
+
+
 
             }
             else
@@ -3527,7 +3595,33 @@ namespace ProInterfaceFracttal
                 Console.WriteLine("Problemas en la conexion presiones una tecla");
                 Console.ReadKey();
 
+/* -------------------------------------- ACTUALIZACION DE ERROR -------------------------------------*/
+                var infoO = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
+                System.Diagnostics.Process.Start(infoO);
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("--------CERRANDO APLICACION POR ERROR Y VOLVIENDO A INICIAR-------");
+
+                Environment.Exit(0);
+
+                using (var progress = new ProgressBar())
+                {
+                    for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
+                    {
+                        progress.Report((double)i / 100);
+                        System.Threading.Thread.Sleep(50);
+                    }
+                }
+
+
+
+
+
                 return;
+
+
+
+
             }
 
             int temp_int = lErrCode;
@@ -3540,6 +3634,27 @@ namespace ProInterfaceFracttal
                 //MessageBox.Show(sErrMsg + " Error 5000");
                 Console.WriteLine("Problemas en la conexion presiones una tecla");
                 Console.ReadKey();
+
+                /* -------------------------------------- ACTUALIZACION DE ERROR -------------------------------------*/
+                var infoO = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
+                System.Diagnostics.Process.Start(infoO);
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("--------CERRANDO APLICACION POR ERROR Y VOLVIENDO A INICIAR-------");
+
+                Environment.Exit(0);
+
+                using (var progress = new ProgressBar())
+                {
+                    for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
+                    {
+                        progress.Report((double)i / 100);
+                        System.Threading.Thread.Sleep(50);
+                    }
+                }
+
+
+                
 
             }
             else
@@ -3614,6 +3729,28 @@ namespace ProInterfaceFracttal
                 Console.WriteLine("Problemas en la conexion presiones una tecla");
                 Console.ReadKey();
 
+                /* -------------------------------------- ACTUALIZACION DE ERROR -------------------------------------*/
+                var infoO = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
+                System.Diagnostics.Process.Start(infoO);
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("--------CERRANDO APLICACION POR ERROR Y VOLVIENDO A INICIAR-------");
+
+                Environment.Exit(0);
+
+                using (var progress = new ProgressBar())
+                {
+                    for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
+                    {
+                        progress.Report((double)i / 100);
+                        System.Threading.Thread.Sleep(50);
+                    }
+                }
+
+
+
+               
+
                 return;
             }
 
@@ -3627,6 +3764,28 @@ namespace ProInterfaceFracttal
                 //MessageBox.Show(sErrMsg + " Error 5000");
                 Console.WriteLine("Problemas en la conexion presiones una tecla");
                 Console.ReadKey();
+
+                /* -------------------------------------- ACTUALIZACION DE ERROR -------------------------------------*/
+                var infoO = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
+                System.Diagnostics.Process.Start(infoO);
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("--------CERRANDO APLICACION POR ERROR Y VOLVIENDO A INICIAR-------");
+
+                Environment.Exit(0);
+
+                using (var progress = new ProgressBar())
+                {
+                    for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
+                    {
+                        progress.Report((double)i / 100);
+                        System.Threading.Thread.Sleep(50);
+                    }
+                }
+
+
+
+                
 
             }
             else
@@ -3700,6 +3859,29 @@ namespace ProInterfaceFracttal
                 Console.WriteLine("Problemas en la conexion presiones una tecla");
                 Console.ReadKey();
 
+                /* -------------------------------------- ACTUALIZACION DE ERROR -------------------------------------*/
+                var infoO = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
+                System.Diagnostics.Process.Start(infoO);
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("--------CERRANDO APLICACION POR ERROR Y VOLVIENDO A INICIAR-------");
+
+                Environment.Exit(0);
+
+                using (var progress = new ProgressBar())
+                {
+                    for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
+                    {
+                        progress.Report((double)i / 100);
+                        System.Threading.Thread.Sleep(50);
+                    }
+                }
+
+
+
+
+                
+
                 // Interaction.MsgBox("Connection Failed - " + sErrMsg, MsgBoxStyle.Exclamation, "Default Connection Failed");
             }
             if (OrdenApp.oCompany.Connected) // if connected
@@ -3748,6 +3930,30 @@ namespace ProInterfaceFracttal
                 Console.WriteLine("Problemas en la conexion de SAP  :(   PRECIONE UNA TECLA PARA CONTINUAR");
                 Console.ReadKey();
 
+                /* -------------------------------------- ACTUALIZACION DE ERROR -------------------------------------*/
+                var infoO = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
+                System.Diagnostics.Process.Start(infoO);
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("--------CERRANDO APLICACION POR ERROR Y VOLVIENDO A INICIAR-------");
+
+                Environment.Exit(0);
+
+                using (var progress = new ProgressBar())
+                {
+                    for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
+                    {
+                        progress.Report((double)i / 100);
+                        System.Threading.Thread.Sleep(50);
+                    }
+                }
+
+
+
+                
+
+               
+
                 // Interaction.MsgBox("Connection Failed - " + sErrMsg, MsgBoxStyle.Exclamation, "Default Connection Failed");
             }
             if (OrdenApp.oCompany.Connected) // if connected
@@ -3791,6 +3997,28 @@ namespace ProInterfaceFracttal
                 Console.WriteLine("Error al Conectar: " + sErrMsg);
                 Console.WriteLine("Problemas en la conexion presiones una tecla");
                 Console.ReadKey();
+
+                /* -------------------------------------- ACTUALIZACION DE ERROR -------------------------------------*/
+                var infoO = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
+                System.Diagnostics.Process.Start(infoO);
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("--------CERRANDO APLICACION POR ERROR Y VOLVIENDO A INICIAR-------");
+
+                Environment.Exit(0);
+
+                using (var progress = new ProgressBar())
+                {
+                    for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
+                    {
+                        progress.Report((double)i / 100);
+                        System.Threading.Thread.Sleep(50);
+                    }
+                }
+
+
+
+                
 
                 // Interaction.MsgBox("Connection Failed - " + sErrMsg, MsgBoxStyle.Exclamation, "Default Connection Failed");
             }
@@ -4198,7 +4426,7 @@ namespace ProInterfaceFracttal
                                               " AND[U_parent_description] NOT LIKE ltrim(rtrim('%SANTA INES%'))" +
                                               " AND[U_ItemCode] != ''" +
                                               " AND [Code] not in ('035803','035804','035805','035806','035461','035662','035777','035787','035789')" +
-                                             // " AND [Code] = '035638' " +
+                                             // " AND [Code] = '036502' " +
                                               " order by 1 desc";
 
                     //var ArticulosMovimiento = " SELECT DISTINCT  convert(nvarchar, [Code]) as code ,[U_type_main]  FROM[dbo].[@ORDENESFRACTTAL] where[Code] not in (Select NumAtCard COLLATE SQL_Latin1_General_CP1_CI_AS FROM ODRF23 WHERE NumAtCard IS NOT NULL and NumAtCard <> '' )   group by [code],[U_type_main]  order by [code] desc";
@@ -4450,6 +4678,7 @@ namespace ProInterfaceFracttal
                 Console.WriteLine("ERROR: "+ex);
 
                 //ELog.save(OrdenApp.oOrder, ex);
+              
 
             }
 
@@ -6373,6 +6602,17 @@ namespace ProInterfaceFracttal
 
         public static void DraftToCocument() {
 
+            using (
+              var progress = new ProgressBar())
+            {
+                for (int h = 0; h <= /*TableC.Rows.Count*/100; h++)
+                {
+                    progress.Report((double)h / 100);
+                    System.Threading.Thread.Sleep(60);
+                }
+            }
+
+
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("--------------------------------------------");
             Console.WriteLine("CONVIRTIENDO BORRADORES EN DOCUMENTOS REALES");
@@ -6503,6 +6743,18 @@ namespace ProInterfaceFracttal
             int l;
             l = 0;
 
+            
+
+
+            var info = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
+            System.Diagnostics.Process.Start(info);
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("------CERRANDO APLICACION PARA CONVERTIR DOCUMENTO BORRADOR A REAL-------");
+
+
+            Environment.Exit(0);
+
             using (var progress = new ProgressBar())
             {
                 for (l = 0; l <= 100; l++)
@@ -6511,16 +6763,6 @@ namespace ProInterfaceFracttal
                     System.Threading.Thread.Sleep(20);
                 }
             }
-
-
-            var info = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
-            System.Diagnostics.Process.Start(info);
-
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("------CERRANDO CARGA DE SOLICITUDES DE COMPRA-------");
-
-
-            Environment.Exit(0);
 
 
 
