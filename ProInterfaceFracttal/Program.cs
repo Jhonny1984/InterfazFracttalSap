@@ -76,11 +76,12 @@ namespace ProInterfaceFracttal
             //GetCargaFracttalMonitores();
 
 
-      //      POSTItemsNuevos();
+            //POSTItemsNuevos();
 
- /* --------------crea codigos logistica y a la vez los actualiza-------------*/
-            
-   //         PutiteTransflesa();
+            /* --------------Actualiza codigos logistica y a la vez los actualiza-------------*/
+
+            PostiteTransflesa();
+            PutiteTransflesa();
 
             /*-------------- Almacena OTs en base de datos desde Fracttal --------------*/
 
@@ -90,7 +91,7 @@ namespace ProInterfaceFracttal
 
 /*--------------------------------------------------------- LOGISTICA -------------------------------------------------------------------------*/
 //-------------- Carga OTs SAP LOGISTICA -----------------------------------
-              AddOrderToDatabase();
+            //  AddOrderToDatabase();
 //-------------- Carga OTs Complementos SAP LOGISTICA ----------------------
             //  AddComplementsToDatabase();
 //-------------- Crea documentos de borrador a real SAP LOGISTICA ----------
@@ -110,7 +111,7 @@ namespace ProInterfaceFracttal
 
 /*--------------------------------------------------------- SANTA INES ------------------------------------------------------------------------*/
 //-------------- Carga OTs SAP Santa Ines ----------------------------------        
-            //  AddOrderToDatabase3();
+             // AddOrderToDatabase3();
 //-------------- Carga Complementos OTs SAP Santa Ines ---------------------
             //  AddComplementsToDatabase3();
 //-------------- Solicitudes de compra OTs SAP Santa Ines ------------------
@@ -274,7 +275,7 @@ namespace ProInterfaceFracttal
             }
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("REGISTROS PARA CREAR NUEVOS ITEMS");
-            Console.WriteLine("----MANTENIMIENTO INDUSTRIAL----");
+            Console.WriteLine("-----------LOGISTICA------------");
             Console.ForegroundColor = ConsoleColor.White;
             //Console.WriteLine(data);
 
@@ -322,7 +323,7 @@ namespace ProInterfaceFracttal
                         "field_2: '" + dataRow[0] + "'," +
                         "unit_code: '12'," +
                         "field_6: '" + dataRow[2] + "'," +
-                        "description: '' } };" +
+                       // "description: '' } };" +
                     "request(options, function(error, response, body) {" +
                     "if (error) throw new Error(error);" +
                     "console.log(body);" +
@@ -911,7 +912,8 @@ namespace ProInterfaceFracttal
             _credential = credential;
             //requisiciones
             var client = new RestClient("https://app.fracttal.com/api/work_orders_movements/?since=" + añoini + "-" + mesini + "-" + diai + "T00:00:00-00&until=" + añofin + "-" + mesfin + "-" + diaf + "T00:00:00-00");
-          //      var client = new RestClient("https://app.fracttal.com/api/work_orders_movements/036491");
+            
+           // var client = new RestClient("https://app.fracttal.com/api/work_orders_movements/036603");
 
             var request = new RestRequest(Method.GET);
             Authenticate(client, request);
@@ -2765,7 +2767,136 @@ namespace ProInterfaceFracttal
 
         }
 
-        /* --------------crea codigos logistica y a la vez los actualiza-------------*/
+
+
+        /* ------------------------------- Crea codigos logistica ---------------------------*/
+        public static void PostiteTransflesa()
+
+              {
+            using (var progress = new ProgressBar())
+            {
+                for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
+                {
+                    progress.Report((double)i / 100);
+                    System.Threading.Thread.Sleep(25);
+                }
+            }
+
+
+            DataTable dataitems = new DataTable();
+            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBTran + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+
+            
+            {
+                
+                var ArticulosMovimiento = "SELECT [ItemCode],[ItemName],[ItmsGrpNam],[CreateDate],[LastPurPrc],[InvntryUom],[OnHand] FROM [dbo].[V_ArticulosNuevos]";
+
+                conexion.Open();
+                SqlDataAdapter adaptador = new SqlDataAdapter(ArticulosMovimiento, conexion);
+                adaptador.Fill(dataitems);
+            }
+
+            Console.WriteLine("DATOS ENCONTRADOS PARA ACTUALIZAR.");
+
+
+            if (dataitems.Rows.Count > 0)
+            {
+                for (int f = 0; f < dataitems.Rows.Count; f++)
+                {
+                    
+                    string ITEM = dataitems.Rows[f][0].ToString();
+                    string DESC = dataitems.Rows[f][1].ToString();
+                    string LOCA = dataitems.Rows[f][2].ToString();
+                    double LASTPUR = Convert.ToDouble(dataitems.Rows[f][4].ToString());
+                    string UNI = dataitems.Rows[f][5].ToString();
+                    double STOCK = Convert.ToDouble(dataitems.Rows[f][6].ToString());
+                    string id_type_item = dataitems.Rows[f][0].ToString();
+                    
+
+                    PostCargaFracttalInventories(ITEM, DESC, LOCA, UNI, LASTPUR, STOCK);
+
+                }
+
+            }
+
+        }
+
+
+
+        public static void PostCargaFracttalInventories(string Item, string Desccripcion, string Localidad, string Unidad, double Costo, double Stock)
+        {
+            Console.WriteLine("---------------- CREANDO ARTICULOS  UNIDAD LOGISTICA ------------------------");
+            string itemcode = Item;
+            string descripcion = Desccripcion;
+            string localidad = "// LOGISTICA/"; //"// MANTENIMIENTO INDUSTRIAL/
+            string unida = Unidad;
+            double costo = Costo;
+            double stock = Stock;
+
+
+
+
+            HawkCredential credential = new HawkCredential
+            {
+                Id = "TLFmgX1Kuef4rsaNxk9z",
+                Key = "0EIAQTJhtUvNqBAXkCserYjjRL7P6HP7WhIxBcf67aUynfWXrPCjyxU",
+                Algorithm = "sha256"
+            };
+
+            _credential = credential;
+    
+            var client = new RestClient("https://app.fracttal.com/api/items");
+
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            Authenticate(client, request);
+            request.AddHeader("Content-Type", "application/json");
+
+
+            //-------------------------------------------------- prueba del codigo nuevo----------------------------------------
+
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddParameter("code", itemcode);
+            request.AddParameter("field_1", descripcion);
+            request.AddParameter("field_2", itemcode);
+            request.AddParameter("unit_description", unida);
+          //  request.AddParameter("location", localidad);
+            request.AddParameter("id_type_item", "4");
+            request.AddParameter("unit_code", itemcode);
+            IRestResponse response = client.Execute(request);
+         //   Console.WriteLine(response.Content);
+
+            //--------------------------------------------------fin prueba----------------------------------------------
+
+            var jsonResponse = JsonConvert.DeserializeObject(response.Content);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Codigo: " + itemcode);
+            Console.WriteLine("Descripcion: " + descripcion);
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Estado: ");
+            Console.WriteLine(jsonResponse);
+
+            using (var progress = new ProgressBar())
+            {
+                for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
+                {
+                    progress.Report((double)i / 100);
+                    System.Threading.Thread.Sleep(15);
+                }
+            }
+            Console.ResetColor();
+        
+
+
+
+        }
+
+
+
+        /* --------------Actualiza codigos logistica y a la vez los actualiza-------------*/
         public static void PutiteTransflesa()
         //public static void PutSiteMacizo()
         {
@@ -2841,9 +2972,9 @@ namespace ProInterfaceFracttal
             _credential = credential;
             //requisiciones
             var client = new RestClient("https://app.fracttal.com/api/inventories/"+itemcode);
-            //var client = new RestClient("https://app.fracttal.com/api/inventories");
+          
 
-            //var request = new RestRequest(Method.POS);
+            
             var request = new RestRequest(Method.PUT);
 
 
@@ -2868,9 +2999,17 @@ namespace ProInterfaceFracttal
             Console.WriteLine("Estado: ");
             Console.WriteLine(jsonResponse);
             Console.ResetColor();
-            //Console.ReadKey();
 
-            
+            using (var progress = new ProgressBar())
+            {
+                for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
+                {
+                    progress.Report((double)i / 100);
+                    System.Threading.Thread.Sleep(15);
+                }
+            }
+
+
 
 
         }
@@ -3464,7 +3603,7 @@ namespace ProInterfaceFracttal
                 Console.WriteLine(ex.Message + "Error 40001");
                 //MessageBox.Show(ex.Message + " Error 40001");
                 Console.WriteLine("Problemas en la conexion presiones una tecla");
-                Console.ReadKey();
+               // Console.ReadKey();
 
 
 /* -------------------------------------- ACTUALIZACION DE ERROR -------------------------------------*/
@@ -3502,7 +3641,7 @@ namespace ProInterfaceFracttal
                 Console.WriteLine(sErrMsg + "Error 5000");
                 //MessageBox.Show(sErrMsg + " Error 5000");
                 Console.WriteLine("Problemas en la conexion presiones una tecla");
-                Console.ReadKey();
+               // Console.ReadKey();
 /* -------------------------------------- ACTUALIZACION DE ERROR -------------------------------------*/
                 var infoO = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
                 System.Diagnostics.Process.Start(infoO);
@@ -3593,7 +3732,7 @@ namespace ProInterfaceFracttal
                 Console.WriteLine(ex.Message + "Error 40001");
                 //MessageBox.Show(ex.Message + " Error 40001");
                 Console.WriteLine("Problemas en la conexion presiones una tecla");
-                Console.ReadKey();
+             //   Console.ReadKey();
 
 /* -------------------------------------- ACTUALIZACION DE ERROR -------------------------------------*/
                 var infoO = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
@@ -3633,7 +3772,7 @@ namespace ProInterfaceFracttal
                 Console.WriteLine(sErrMsg + "Error 5000");
                 //MessageBox.Show(sErrMsg + " Error 5000");
                 Console.WriteLine("Problemas en la conexion presiones una tecla");
-                Console.ReadKey();
+               // Console.ReadKey();
 
                 /* -------------------------------------- ACTUALIZACION DE ERROR -------------------------------------*/
                 var infoO = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
@@ -3727,7 +3866,7 @@ namespace ProInterfaceFracttal
                 Console.WriteLine(ex.Message + "Error 40001");
                 //MessageBox.Show(ex.Message + " Error 40001");
                 Console.WriteLine("Problemas en la conexion presiones una tecla");
-                Console.ReadKey();
+               // Console.ReadKey();
 
                 /* -------------------------------------- ACTUALIZACION DE ERROR -------------------------------------*/
                 var infoO = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
@@ -3763,7 +3902,7 @@ namespace ProInterfaceFracttal
                 Console.WriteLine(sErrMsg + "Error 5000");
                 //MessageBox.Show(sErrMsg + " Error 5000");
                 Console.WriteLine("Problemas en la conexion presiones una tecla");
-                Console.ReadKey();
+               // Console.ReadKey();
 
                 /* -------------------------------------- ACTUALIZACION DE ERROR -------------------------------------*/
                 var infoO = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
@@ -3857,7 +3996,7 @@ namespace ProInterfaceFracttal
                 OrdenApp.oCompany.GetLastError(out temp_int, out temp_string);
                 Console.WriteLine("Error al Conectar: " + sErrMsg);
                 Console.WriteLine("Problemas en la conexion presiones una tecla");
-                Console.ReadKey();
+               // Console.ReadKey();
 
                 /* -------------------------------------- ACTUALIZACION DE ERROR -------------------------------------*/
                 var infoO = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
@@ -3928,7 +4067,7 @@ namespace ProInterfaceFracttal
                 Console.ForegroundColor = System.ConsoleColor.Red;
                 Console.WriteLine("Error al Conectar: " + sErrMsg);
                 Console.WriteLine("Problemas en la conexion de SAP  :(   PRECIONE UNA TECLA PARA CONTINUAR");
-                Console.ReadKey();
+                //Console.ReadKey();
 
                 /* -------------------------------------- ACTUALIZACION DE ERROR -------------------------------------*/
                 var infoO = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
@@ -3996,7 +4135,7 @@ namespace ProInterfaceFracttal
                 OrdenApp.oCompany.GetLastError(out temp_int, out temp_string);
                 Console.WriteLine("Error al Conectar: " + sErrMsg);
                 Console.WriteLine("Problemas en la conexion presiones una tecla");
-                Console.ReadKey();
+                //Console.ReadKey();
 
                 /* -------------------------------------- ACTUALIZACION DE ERROR -------------------------------------*/
                 var infoO = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
