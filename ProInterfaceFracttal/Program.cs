@@ -55,8 +55,8 @@ namespace ProInterfaceFracttal
         static void Main(string[] args)
         {
             //EnviaCorreo.EnviaCorreos("E001","123456","1");
-            // PutSiteMacizo();
-            //PutiteMacizo();
+            //PutSiteMacizo();
+            //PutitemMacizo();
             //PutiteSantaInes();
 
             // PutCargaFracttalInventories();
@@ -65,7 +65,7 @@ namespace ProInterfaceFracttal
             //TestBatches.ConectandoDB();
             ////TestBatches.BatchUpdate();
             ////L////
- 
+
             //Mantenimiento industrial
             //POSTItemsNuevos2();
             //PutDatosFracttal();
@@ -78,43 +78,53 @@ namespace ProInterfaceFracttal
 
             //POSTItemsNuevos();
 
-            /* --------------Actualiza codigos logistica y a la vez los actualiza-------------*/
+            /* ----------------------------- Codigos LOGISTICA ----------------------------------*/
 
-            PostiteTransflesa();
-            PutiteTransflesa();
+            //PostiteTransflesa();
+            //PutiteTransflesa();
+
+            /* ----------------------------- Codigos MACIZO ----------------------------------*/
+
+           // PostiteMacizo();
+            PutiteMacizo();
+
+            /* ----------------------------- Codigos MACIZO ----------------------------------*/
+
+            //PostiteSanta();
+            //PutiteSanta();
 
             /*-------------- Almacena OTs en base de datos desde Fracttal --------------*/
 
-          //  GetCargaHoy.GetCargaFracttal();
+            //  GetCargaHoy.GetCargaFracttal();
 
-          //   GetCargaFracttal();
+            //   GetCargaFracttal();
 
-/*--------------------------------------------------------- LOGISTICA -------------------------------------------------------------------------*/
-//-------------- Carga OTs SAP LOGISTICA -----------------------------------
+            /*--------------------------------------------------------- LOGISTICA -------------------------------------------------------------------------*/
+            //-------------- Carga OTs SAP LOGISTICA -----------------------------------
             //  AddOrderToDatabase();
-//-------------- Carga OTs Complementos SAP LOGISTICA ----------------------
+            //-------------- Carga OTs Complementos SAP LOGISTICA ----------------------
             //  AddComplementsToDatabase();
-//-------------- Crea documentos de borrador a real SAP LOGISTICA ----------
+            //-------------- Crea documentos de borrador a real SAP LOGISTICA ----------
             //   DraftToCocument();
-//-------------- Crea solicitudes de compra SAP LOGISTICA ------------------
+            //-------------- Crea solicitudes de compra SAP LOGISTICA ------------------
             //  AddPurchaseOrder();
 
 
-/*-------------------------------------------------------- MANTENIMIENTO ----------------------------------------------------------------------*/
-//-------------- Carga OTs SAP MANTENIMIENTO -------------------------------
-            //  AddOrderToDatabase2();
-//-------------- Carga Complementos SAP MANTENIMIENTO ----------------------
+            /*-------------------------------------------------------- MANTENIMIENTO ----------------------------------------------------------------------*/
+            //-------------- Carga OTs SAP MANTENIMIENTO -------------------------------
+            //   AddOrderToDatabase2();
+            //-------------- Carga Complementos SAP MANTENIMIENTO ----------------------
             //  AddComplementsToDatabase2();
-//-------------- Solicitudes de compra OTs SAP MANTENIMIENTO ---------------
+            //-------------- Solicitudes de compra OTs SAP MANTENIMIENTO ---------------
             //  AddPurchaseOrder2();
 
 
-/*--------------------------------------------------------- SANTA INES ------------------------------------------------------------------------*/
-//-------------- Carga OTs SAP Santa Ines ----------------------------------        
-             // AddOrderToDatabase3();
-//-------------- Carga Complementos OTs SAP Santa Ines ---------------------
+            /*--------------------------------------------------------- SANTA INES ------------------------------------------------------------------------*/
+            //-------------- Carga OTs SAP Santa Ines ----------------------------------        
+            // AddOrderToDatabase3();
+            //-------------- Carga Complementos OTs SAP Santa Ines ---------------------
             //  AddComplementsToDatabase3();
-//-------------- Solicitudes de compra OTs SAP Santa Ines ------------------
+            //-------------- Solicitudes de compra OTs SAP Santa Ines ------------------
             //  AddPurchaseOrder3();
 
 
@@ -123,7 +133,314 @@ namespace ProInterfaceFracttal
         }
 
 
-        //public static SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=TRANSFLESA91;Persist Security Info=True;User ID=sa;Password=Ceo2015*");
+       
+
+        /*------------------------------------Crea codigos MACIZO--------------------------------------------*/
+
+        public static void PostiteMacizo()
+        {
+
+
+            using (var progress = new ProgressBar())
+            {
+                for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
+                {
+                    progress.Report((double)i / 100);
+                    System.Threading.Thread.Sleep(25);
+                }
+            }
+
+
+            DataTable dataitems = new DataTable();
+            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBMaci + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+
+
+            {
+
+                 var ArticulosMovimiento = "SELECT [ItemCode],[ItemName],[ItmsGrpNam],[CreateDate],[LastPurPrc],isnull([InvntryUom],'UN')as InvntryUom,[OnHand] FROM [dbo].[V_ArticulosNuevos]";
+                //var ArticulosMovimiento = "SELECT[ItemCode],[ItemName],[ItmsGrpNam],[CreateDate],[LastPurPrc],[InvntryUom],[OnHand] FROM[dbo].[V_ArticulosNuevos]";
+
+                conexion.Open();
+                SqlDataAdapter adaptador = new SqlDataAdapter(ArticulosMovimiento, conexion);
+                adaptador.Fill(dataitems);
+            }
+
+            Console.WriteLine("DATOS ENCONTRADOS PARA CREAR.");
+
+
+            if (dataitems.Rows.Count > 0)
+            {
+                for (int f = 0; f < dataitems.Rows.Count; f++)
+                {
+
+                    string ITEM = dataitems.Rows[f][0].ToString();
+                    string DESC = dataitems.Rows[f][1].ToString();
+                    string LOCA = dataitems.Rows[f][2].ToString();
+                    double LASTPUR = Convert.ToDouble(dataitems.Rows[f][4].ToString());
+                    string UNI = dataitems.Rows[f][5].ToString();
+                    double STOCK = Convert.ToDouble(dataitems.Rows[f][6].ToString());
+                    string id_type_item = dataitems.Rows[f][0].ToString();
+
+
+                    PostCargaFracttalInventoriesMac(ITEM, DESC, LOCA, UNI, LASTPUR, STOCK);
+
+                }
+
+            }
+
+        }
+
+
+
+        public static void PostCargaFracttalInventoriesMac(string Item, string Desccripcion, string Localidad, string Unidad, double Costo, double Stock)
+        {
+            Console.WriteLine("---------------- CREANDO ARTICULOS  UNIDAD MACIZO-- ------------------------");
+            string itemcode = Item;
+            string descripcion = Desccripcion;
+            string localidad = "M"; //"CODIGO DE UBICACION MACIZO/
+            string unida = Unidad;
+            double costo = Costo;
+            double stock = Stock;
+
+
+
+
+            HawkCredential credential = new HawkCredential
+            {
+                Id = "TLFmgX1Kuef4rsaNxk9z",
+                Key = "0EIAQTJhtUvNqBAXkCserYjjRL7P6HP7WhIxBcf67aUynfWXrPCjyxU",
+                Algorithm = "sha256"
+            };
+
+            _credential = credential;
+
+            var client = new RestClient("https://app.fracttal.com/api/items");
+
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            Authenticate(client, request);
+            request.AddHeader("Content-Type", "application/json");
+
+
+            //-------------------------------------------------- prueba del codigo nuevo----------------------------------------
+
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddParameter("code", "M"+itemcode); //Agrega el prefijo de Macizo en el codigo
+            request.AddParameter("field_1", descripcion);
+            request.AddParameter("field_2", "M"+itemcode);//Agrega el prefijo de Macizo en el numero de parte
+            request.AddParameter("unit_description", unida);
+            request.AddParameter("code_parent_location", localidad); //codigo de la ubicacion
+            request.AddParameter("id_type_item", "4");
+            request.AddParameter("unit_code", "M"+itemcode);//Agrega el prefijo de Macizo
+            IRestResponse response = client.Execute(request);
+
+
+            //--------------------------------------------------fin prueba----------------------------------------------
+
+            //var jsonResponse = JsonConvert.DeserializeObject(response.Content);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Codigo: " + itemcode);
+            Console.WriteLine("Descripcion: " + descripcion);
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Estado: ");
+            //Console.WriteLine(jsonResponse);
+            Console.WriteLine(response.Content);
+            using (var progress = new ProgressBar())
+            {
+                for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
+                {
+                    progress.Report((double)i / 100);
+                    System.Threading.Thread.Sleep(5);
+                }
+            }
+            Console.ResetColor();
+
+
+            //var info = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
+            //System.Diagnostics.Process.Start(info);
+
+            //Console.ForegroundColor = ConsoleColor.Red;
+            //Console.WriteLine("--------CERRANDO CARGA DE REQUERIMIENTOS-------");
+
+
+            //Environment.Exit(0);
+
+
+        }
+
+        /*---------------------------------- Actualiza Codigos Macizo--------------------------------------------*/
+        public static void PutiteMacizo()
+        {
+
+            using (var progress = new ProgressBar())
+            {
+                for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
+                {
+                    progress.Report((double)i / 100);
+                    System.Threading.Thread.Sleep(25);
+                }
+            }
+
+
+            DataTable dataitems = new DataTable();
+            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBMaci + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+
+            // using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+            {
+                // var ArticulosMovimiento = "select  * from INVENTARIOS where Codigo between 'VARIOS1831' and 'VARIOS1906'";
+                var ArticulosMovimiento = "SELECT [ItemCode],[ItemName],[ItmsGrpNam],[CreateDate],[LastPurPrc],isnull([InvntryUom],'UN')as InvntryUom,[OnHand] FROM [dbo].[V_ArticulosNuevos]";
+
+                conexion.Open();
+                SqlDataAdapter adaptador = new SqlDataAdapter(ArticulosMovimiento, conexion);
+                adaptador.Fill(dataitems);
+            }
+
+            Console.WriteLine("CODIGOS ENCONTRADOS PARA ACTUALIZAR MACIZO");
+
+
+            if (dataitems.Rows.Count > 0)
+            {
+                for (int f = 0; f < dataitems.Rows.Count; f++)
+                {
+                    //dt.Rows[i][0].ToString().Trim()
+                    string ITEM = dataitems.Rows[f][0].ToString();
+                    string DESC = dataitems.Rows[f][1].ToString();
+                    string LOCA = dataitems.Rows[f][2].ToString();
+                    double LASTPUR = Convert.ToDouble(dataitems.Rows[f][4].ToString());
+                    string UNI = dataitems.Rows[f][5].ToString();
+                    double STOCK = Convert.ToDouble(dataitems.Rows[f][6].ToString());
+
+
+                    PutCargaFracttalInventoriesMac(ITEM, DESC, LOCA, UNI, LASTPUR, STOCK);
+
+                }
+
+            }
+
+        }
+
+
+
+        public static void PutCargaFracttalInventoriesMac(string Item, string Desccripcion, string Localidad, string Unidad, double Costo, double Stock)
+        {
+            Console.WriteLine("ACTUALIZANDO CODIGOS MACIZO");
+            string itemcode = "M"+Item;
+            string descripcion = Desccripcion;
+            string localidad = ""; 
+            string unida = Unidad;
+            double costo = Costo;
+            double stock = Stock;
+
+
+
+
+            HawkCredential credential = new HawkCredential
+            {
+                Id = "TLFmgX1Kuef4rsaNxk9z",
+                Key = "0EIAQTJhtUvNqBAXkCserYjjRL7P6HP7WhIxBcf67aUynfWXrPCjyxU",
+                Algorithm = "sha256"
+            };
+
+            _credential = credential;
+            //requisiciones
+            var client = new RestClient("https://app.fracttal.com/api/items/" + itemcode);
+
+
+
+            var request = new RestRequest(Method.PUT);
+
+
+            Authenticate(client, request);
+
+
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddParameter("code", itemcode); //Agrega el prefijo de Macizo en el codigo
+            request.AddParameter("field_1", descripcion);
+            request.AddParameter("field_2", itemcode);//Agrega el prefijo de Macizo en el numero de parte
+           // request.AddParameter("unit_code", "M" + itemcode);//Agrega el prefijo de Macizo
+            request.AddParameter("unit_description", unida);
+            request.AddParameter("code_parent_location", localidad); //codigo de la ubicacion
+            request.AddParameter("id_type_item", "4");
+            request.AddParameter("id_warehouse", "1550");//Agrega almacen macizo
+            request.AddParameter("stock", Stock);
+            request.AddParameter("max_stock_level", "2");
+            request.AddParameter("min_stock_level", "1");
+            request.AddParameter("stock_temp", "0");
+            request.AddParameter("unit_cost_stock", costo);
+            IRestResponse response = client.Execute(request);
+
+
+            //request.AddHeader("Content-Type", "application/json");
+            //// request.AddParameter("undefined", "{\n    \"date\": \"2019-07-22T21:00:00-03\",\n    \"value\": 1,\n    \"serial\": \"100\"\n}", ParameterType.RequestBody);
+            //request.AddParameter("undefined", "{" +
+            //    "\n \"code\": \"" + "M"+itemcode + "\"," +
+            //    "\n  \"field_1\": \"" + descripcion + "\"," +
+            //    "\n  \"field_2\": \"" + "M"+itemcode + "\"," +
+            //    "\n  \"field_3\": \"\"," +
+            //    "\n  \"field_4\": \"\"," +
+            //    "\n  \"field_5\": \"\"," +
+            //    "\n  \"field_6\": \"\"," +
+            //    "\n  \"id_warehouse\": 1550," +
+            //   // "\n  \"location\": \"// MACIZO MANTENIMIENTO/ MACIZO/ \"," +
+            //    "\n  \"max_stock_level\": 2," +
+            //    "\n  \"min_stock_level\": 0," +
+            //    "\n  \"reorder_level\": 1," +
+            //    "\n  \"stock\": \"" + stock + "\"," +
+            //    "\n  \"stock_temp\": 0," +
+            //    "\n  \"unit_cost_stock\": " + costo + "" +
+            //    //"\n, \"unit_code\": 12" +
+            //    "\n}", ParameterType.RequestBody);
+
+
+            //            request.AddParameter("\"" + "Date\":" + "\"" + "2019-07-06T00:00:00-05\""+"," + "\"" + "value\":"+"2"+"," + "\"" + "serial\":"+"\""+"100\"" , ParameterType.RequestBody);
+
+            //IRestResponse response = client.Execute(request);
+            // var jsonResponse = JsonConvert.DeserializeObject(response.Content);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Codigo: " + itemcode);
+            Console.WriteLine("Descripcion: " + descripcion);
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Estado: ");
+            //  Console.WriteLine(jsonResponse);
+            Console.WriteLine(response.Content);
+            
+            Console.ResetColor();
+            
+            using (var progress = new ProgressBar())
+            {
+                for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
+                {
+                    progress.Report((double)i / 100);
+                    System.Threading.Thread.Sleep(15);
+                }
+            }
+
+            Console.WriteLine("End SomeMethod");
+
+
+
+        }
+
+        /*------------------------------------Crea codigos SANTA INES--------------------------------------------*/
+
+
+        public static void PostiteSanta()
+        {
+
+        }
+
+        public static void PutiteSanta()
+        {
+
+        }
+
+
 
         public static void POSTItemsNuevos() {
 
@@ -2587,7 +2904,7 @@ namespace ProInterfaceFracttal
         //-----------------------Actualiza ITEMS Logistica---------------------------------------------------------------
 
 
-        public static void PutiteMacizo()
+        public static void PutitemMacizo()
         //public static void PutSiteMacizo()
         {
 
@@ -2771,8 +3088,9 @@ namespace ProInterfaceFracttal
 
         /* ------------------------------- Crea codigos logistica ---------------------------*/
         public static void PostiteTransflesa()
+        {
 
-              {
+
             using (var progress = new ProgressBar())
             {
                 for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
@@ -2786,17 +3104,18 @@ namespace ProInterfaceFracttal
             DataTable dataitems = new DataTable();
             using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBTran + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-            
+                
             {
                 
-                var ArticulosMovimiento = "SELECT [ItemCode],[ItemName],[ItmsGrpNam],[CreateDate],[LastPurPrc],isnull([InvntryUom],'UN')as InvntryUom,[OnHand] FROM [dbo].[V_ArticulosNuevos]";
+               // var ArticulosMovimiento = "SELECT [ItemCode],[ItemName],[ItmsGrpNam],[CreateDate],[LastPurPrc],isnull([InvntryUom],'UN')as InvntryUom,[OnHand] FROM [dbo].[V_ArticulosNuevos]";
+                var ArticulosMovimiento = "SELECT[ItemCode],[ItemName],[ItmsGrpNam],[CreateDate],[LastPurPrc],[InvntryUom],[OnHand] FROM[dbo].[V_ArticulosNuevos]";
 
                 conexion.Open();
                 SqlDataAdapter adaptador = new SqlDataAdapter(ArticulosMovimiento, conexion);
                 adaptador.Fill(dataitems);
             }
 
-            Console.WriteLine("DATOS ENCONTRADOS PARA ACTUALIZAR.");
+            Console.WriteLine("DATOS ENCONTRADOS PARA CREAR.");
 
 
             if (dataitems.Rows.Count > 0)
@@ -2884,15 +3203,24 @@ namespace ProInterfaceFracttal
                 for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
                 {
                     progress.Report((double)i / 100);
-                    System.Threading.Thread.Sleep(15);
+                    System.Threading.Thread.Sleep(5);
                 }
             }
             Console.ResetColor();
-        
 
 
+            //var info = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
+            //System.Diagnostics.Process.Start(info);
 
+            //Console.ForegroundColor = ConsoleColor.Red;
+            //Console.WriteLine("--------CERRANDO CARGA DE REQUERIMIENTOS-------");
+
+
+            //Environment.Exit(0);
+            
         }
+
+     
 
 
 
@@ -3014,11 +3342,17 @@ namespace ProInterfaceFracttal
 
 
         }
-
-
-
-
         //---------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
 
         public static void Cargarordenesfracttal(string OrdenTra)
         {
