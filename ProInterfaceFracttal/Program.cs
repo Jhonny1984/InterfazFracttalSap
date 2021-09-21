@@ -2789,7 +2789,7 @@ namespace ProInterfaceFracttal
             
             {
                 
-                var ArticulosMovimiento = "SELECT [ItemCode],[ItemName],[ItmsGrpNam],[CreateDate],[LastPurPrc],[InvntryUom],[OnHand] FROM [dbo].[V_ArticulosNuevos]";
+                var ArticulosMovimiento = "SELECT [ItemCode],[ItemName],[ItmsGrpNam],[CreateDate],[LastPurPrc],isnull([InvntryUom],'UN')as InvntryUom,[OnHand] FROM [dbo].[V_ArticulosNuevos]";
 
                 conexion.Open();
                 SqlDataAdapter adaptador = new SqlDataAdapter(ArticulosMovimiento, conexion);
@@ -2828,7 +2828,7 @@ namespace ProInterfaceFracttal
             Console.WriteLine("---------------- CREANDO ARTICULOS  UNIDAD LOGISTICA ------------------------");
             string itemcode = Item;
             string descripcion = Desccripcion;
-            string localidad = "// LOGISTICA/"; //"// MANTENIMIENTO INDUSTRIAL/
+            string localidad = "L"; //"CODIGO DE UBICACION LOGISTICA/
             string unida = Unidad;
             double costo = Costo;
             double stock = Stock;
@@ -2860,15 +2860,15 @@ namespace ProInterfaceFracttal
             request.AddParameter("field_1", descripcion);
             request.AddParameter("field_2", itemcode);
             request.AddParameter("unit_description", unida);
-          //  request.AddParameter("location", localidad);
+            request.AddParameter("code_parent_location", localidad);
             request.AddParameter("id_type_item", "4");
             request.AddParameter("unit_code", itemcode);
             IRestResponse response = client.Execute(request);
-         //   Console.WriteLine(response.Content);
+         
 
             //--------------------------------------------------fin prueba----------------------------------------------
 
-            var jsonResponse = JsonConvert.DeserializeObject(response.Content);
+            //var jsonResponse = JsonConvert.DeserializeObject(response.Content);
             Console.ForegroundColor = ConsoleColor.Red;
             Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Green;
@@ -2877,8 +2877,8 @@ namespace ProInterfaceFracttal
 
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Estado: ");
-            Console.WriteLine(jsonResponse);
-
+            //Console.WriteLine(jsonResponse);
+            Console.WriteLine(response.Content);
             using (var progress = new ProgressBar())
             {
                 for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
@@ -2988,7 +2988,7 @@ namespace ProInterfaceFracttal
             //            request.AddParameter("\"" + "Date\":" + "\"" + "2019-07-06T00:00:00-05\""+"," + "\"" + "value\":"+"2"+"," + "\"" + "serial\":"+"\""+"100\"" , ParameterType.RequestBody);
 
             IRestResponse response = client.Execute(request);
-            var jsonResponse = JsonConvert.DeserializeObject(response.Content);
+           // var jsonResponse = JsonConvert.DeserializeObject(response.Content);
             Console.ForegroundColor = ConsoleColor.Red;
             Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Green;
@@ -2997,7 +2997,8 @@ namespace ProInterfaceFracttal
             
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Estado: ");
-            Console.WriteLine(jsonResponse);
+            //  Console.WriteLine(jsonResponse);
+            Console.WriteLine(response.Content);
             Console.ResetColor();
 
             using (var progress = new ProgressBar())
