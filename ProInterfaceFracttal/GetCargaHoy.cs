@@ -31,12 +31,17 @@ namespace ProInterfaceFracttal
 
         /*to sql server conexions string use te global variables string */
         public static string IpServerSql = "192.168.0.4";
+       
         public static string ServerSqlUser = "sa";
         public static string ServerSqlPass = "Ceo2015*";
+       
         public static string ServerSqlPort = "1433";
-        public static string ServerSqlDBTran = "TRANSFLESA91";
-        public static string ServerSqlDBMaci = "INVERFFACSA91";
-        public static string ServerSqlDBSant = "SBO_SANTAINES_2";
+        //public static string ServerSqlDBTran = "TRANSFLESA91";
+        //public static string ServerSqlDBMaci = "INVERFFACSA91";
+        //public static string ServerSqlDBSant = "SBO_SANTAINES_2";
+        public static string ServerSqlDBTran = "SBO_TRANSFLESA";
+        public static string ServerSqlDBMaci = "SBO_MACIZO";
+        public static string ServerSqlDBSant = "SBO_SANTAINES";
         public static string ServerSqlDBINTER = "DB_INTERFACE";
 
         public static DataTable tabla2 = new DataTable();
@@ -48,15 +53,15 @@ namespace ProInterfaceFracttal
 
             Console.WriteLine("[INICIA LA CARGAR DE OTS DE DIA DE HOY]");
 
-            using (
-               var progress = new ProgressBar())
-            {
-                for (int h = 0; h <= /*TableC.Rows.Count*/100; h++)
-                {
-                    progress.Report((double)h / 100);
-                    System.Threading.Thread.Sleep(60);
-                }
-            }
+            //using (
+            //   var progress = new ProgressBar())
+            //{
+            //    for (int h = 0; h <= /*TableC.Rows.Count*/100; h++)
+            //    {
+            //        progress.Report((double)h / 100);
+            //        System.Threading.Thread.Sleep(60);
+            //    }
+            //}
 
 
             ////Setiamos el dia para cargar ordenes
@@ -91,8 +96,9 @@ namespace ProInterfaceFracttal
 
             _credential = credential;
             //requisiciones
-          //  var client = new RestClient("https://app.fracttal.com/api/work_orders_movements/?since=" + añoini + "-" + mesini + "-" + diai + "T00:00:00-00&until=" + añofin + "-" + mesfin + "-" + diaf + "T00:00:00-00");
-                var client = new RestClient("https://app.fracttal.com/api/work_orders_movements/033838");
+           var client = new RestClient("https://app.fracttal.com/api/work_orders_movements/?since=" + añoini + "-" + mesini + "-" + diai + "T00:00:00-00&until=" + añofin + "-" + mesfin + "-" + diaf + "T00:00:00-00");
+           
+          // var client = new RestClient("https://app.fracttal.com/api/work_orders_movements/038417");
 
             var request = new RestRequest(Method.GET);
             Authenticate(client, request);
@@ -562,7 +568,8 @@ namespace ProInterfaceFracttal
 
                     DataTable dtDistinct = new DataTable();
 
-                    string[] sColumnas = { "folio_source", "date", "document1", "ItemCode", "items_description", "qty", "qty_pending", "unit_cost_company", "Completed_percentage", "code1", "personnel_description", "note", "tasks_log_task_type_main", "movements_states_description", "parent_description", /*"tasks_log_types_2_description",*/ "costs_center_description", "id_request"/*, "groups_2_description"*/, "items_log_description" };
+                    // string[] sColumnas = { "folio_source", "date", "document1", "ItemCode", "items_description", "qty", "qty_pending", "unit_cost_company", "Completed_percentage", "code1", "personnel_description", "note", "tasks_log_task_type_main", "movements_states_description", "parent_description", /*"tasks_log_types_2_description",*/ "costs_center_description", "id_request"/*, "groups_2_description"*/, "items_log_description" };
+                    string[] sColumnas = { "folio_source", "date", "document1", "ItemCode", "items_description", "qty", "qty_pending", "unit_cost_company", "Completed_percentage", "code1", "personnel_description", "note", "tasks_log_task_type_main", "movements_states_description", "parent_description", /*"tasks_log_types_2_description",*/ "costs_center_description", "id_request", "items_log_description", "groups_2_description" };
                     dtDistinct = TableC.DefaultView.ToTable(true, sColumnas);
 
 
@@ -1004,7 +1011,7 @@ namespace ProInterfaceFracttal
                     ",@U_personnel_descript" +
                     ",SUBSTRING(@U_note,1, 150)" + // Rocortado a 150 caracteres 16092021
                     ",@U_movements_states_description " +
-                    ",@U_items_log_description )";
+                    ",SUBSTRING(@U_items_log_description,1, 50 ) )";
                 int contador2 = 0;
                 using (SqlCommand command = new SqlCommand(query2, conexion))
 
@@ -1105,7 +1112,7 @@ namespace ProInterfaceFracttal
                     "   [U_costs_center_description], " +
                     "   [U_Department1]  " +
                     //  "   [U_id_request] " +
-                    // "   ,[U_groups_2_description] " +
+                     "   ,[U_groups_2_description] " +
                     " ) " +
                     "   VALUES( @Code, " +
                     "   @Name, " +
@@ -1117,7 +1124,7 @@ namespace ProInterfaceFracttal
                     "   @costs_center_description, " +
                     "   @Department1 " +
                     //    "   @id_request " +
-                    //  "   , @U_groups_2_description " +
+                      "   , @U_groups_2_description " +
                     " ) ";
                 int contador = 0;
                 using (SqlCommand command = new SqlCommand(query, conexion))
@@ -1137,7 +1144,7 @@ namespace ProInterfaceFracttal
                         command.Parameters.AddWithValue("@costs_center_description", dt.Rows[i][15].ToString().Trim());
                         command.Parameters.AddWithValue("@Department1", /*dt.Rows[i][17].ToString().Trim()*/Departamento.ToString().Trim());
                         //   command.Parameters.AddWithValue("@id_request", dt.Rows[i][17].ToString().Trim());
-                        //command.Parameters.AddWithValue("@U_groups_2_description", dt.Rows[i][18].ToString().Trim());
+                        command.Parameters.AddWithValue("@U_groups_2_description", dt.Rows[i][18].ToString().Trim());
 
 
 

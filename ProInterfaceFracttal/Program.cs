@@ -20,8 +20,34 @@ using System.IO;
 using System.Web;
 using RestSharp.Extensions;
 
+
+
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+using System.Runtime.InteropServices;
+//using System.Text;
+using System.Threading.Tasks;
+
+
+
 namespace ProInterfaceFracttal
 {
+
+    static class Imports
+    {
+        public static IntPtr HWND_BOTTOM = (IntPtr)2;
+        // public static IntPtr HWND_NOTOPMOST = (IntPtr)-2;
+        public static IntPtr HWND_TOP = (IntPtr)1;
+        // public static IntPtr HWND_TOPMOST = (IntPtr)-1;
+
+        public static uint SWP_NOSIZE = 1;
+        public static uint SWP_NOZORDER = 4;
+
+        [DllImport("user32.dll", EntryPoint = "SetWindowPos")]
+        public static extern IntPtr SetWindowPos(IntPtr hWnd, int hWndInsertAfter, int x, int Y, int cx, int cy, uint wFlags);
+    }
+
     public static class Program
     {
         static HawkCredential _credential;
@@ -42,9 +68,9 @@ namespace ProInterfaceFracttal
         public static string ServerSqlUser = "sa";
         public static string ServerSqlPass = "Ceo2015*";
         public static string ServerSqlPort = "1433";
-        public static string ServerSqlDBTran = "TRANSFLESA91";
-        public static string ServerSqlDBMaci = "INVERFFACSA91";
-        public static string ServerSqlDBSant = "SBO_SANTAINES_2";
+        public static string ServerSqlDBTran = "SBO_TRANSFLESA";
+        public static string ServerSqlDBMaci = "SBO_MACIZO";
+        public static string ServerSqlDBSant = "SBO_SANTAINES";
         public static string ServerSqlDBINTER = "DB_INTERFACE";
 
 
@@ -84,35 +110,35 @@ namespace ProInterfaceFracttal
             //PutiteTransflesa();
 
             /* ----------------------------- Codigos MACIZO ----------------------------------*/
+            //----------------------------------------------
+            //PostiteMacizo();
+            //PutiteMacizo();
 
-           // PostiteMacizo();
-            PutiteMacizo();
+            /* ----------------------------- Codigos SANTA INES ------------------------------*/
 
-            /* ----------------------------- Codigos MACIZO ----------------------------------*/
-
-            //PostiteSanta();
-            //PutiteSanta();
+           // PostiteSanta();
+           // PutiteSanta();
 
             /*-------------- Almacena OTs en base de datos desde Fracttal --------------*/
 
-            //  GetCargaHoy.GetCargaFracttal();
+            // GetCargaHoy.GetCargaFracttal();
 
-            //   GetCargaFracttal();
+             //  GetCargaFracttal();
 
             /*--------------------------------------------------------- LOGISTICA -------------------------------------------------------------------------*/
             //-------------- Carga OTs SAP LOGISTICA -----------------------------------
-            //  AddOrderToDatabase();
+             // AddOrderToDatabase();
             //-------------- Carga OTs Complementos SAP LOGISTICA ----------------------
             //  AddComplementsToDatabase();
             //-------------- Crea documentos de borrador a real SAP LOGISTICA ----------
-            //   DraftToCocument();
+               DraftToCocument();
             //-------------- Crea solicitudes de compra SAP LOGISTICA ------------------
             //  AddPurchaseOrder();
 
 
             /*-------------------------------------------------------- MANTENIMIENTO ----------------------------------------------------------------------*/
-            //-------------- Carga OTs SAP MANTENIMIENTO -------------------------------
-            //   AddOrderToDatabase2();
+            //-------------- Carga OTs SAP MANTENIMIENTO LISTO -------------------------------
+            //  AddOrderToDatabase2();
             //-------------- Carga Complementos SAP MANTENIMIENTO ----------------------
             //  AddComplementsToDatabase2();
             //-------------- Solicitudes de compra OTs SAP MANTENIMIENTO ---------------
@@ -152,7 +178,7 @@ namespace ProInterfaceFracttal
 
 
             DataTable dataitems = new DataTable();
-            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBMaci + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBMaci + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
 
             {
@@ -286,9 +312,9 @@ namespace ProInterfaceFracttal
 
 
             DataTable dataitems = new DataTable();
-            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBMaci + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBMaci + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-            // using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+            // using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
             {
                 // var ArticulosMovimiento = "select  * from INVENTARIOS where Codigo between 'VARIOS1831' and 'VARIOS1906'";
                 var ArticulosMovimiento = "SELECT [ItemCode],[ItemName],[ItmsGrpNam],[CreateDate],[LastPurPrc],isnull([InvntryUom],'UN')as InvntryUom,[OnHand] FROM [dbo].[V_ArticulosNuevos]";
@@ -433,10 +459,273 @@ namespace ProInterfaceFracttal
         public static void PostiteSanta()
         {
 
+
+            using (var progress = new ProgressBar())
+            {
+                for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
+                {
+                    progress.Report((double)i / 100);
+                    System.Threading.Thread.Sleep(25);
+                }
+            }
+
+
+            DataTable dataitems = new DataTable();
+            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBSant + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+
+
+            {
+
+                var ArticulosMovimiento = "SELECT [ItemCode],[ItemName],[ItmsGrpNam],[CreateDate],[LastPurPrc],isnull([InvntryUom],'UN')as InvntryUom,[OnHand] FROM [dbo].[V_ArticulosNuevos]";
+                //var ArticulosMovimiento = "SELECT[ItemCode],[ItemName],[ItmsGrpNam],[CreateDate],[LastPurPrc],[InvntryUom],[OnHand] FROM[dbo].[V_ArticulosNuevos]";
+
+                conexion.Open();
+                SqlDataAdapter adaptador = new SqlDataAdapter(ArticulosMovimiento, conexion);
+                adaptador.Fill(dataitems);
+            }
+
+            Console.WriteLine("DATOS ENCONTRADOS PARA CREAR.");
+
+
+            if (dataitems.Rows.Count > 0)
+            {
+                for (int f = 0; f < dataitems.Rows.Count; f++)
+                {
+
+                    string ITEM = dataitems.Rows[f][0].ToString();
+                    string DESC = dataitems.Rows[f][1].ToString();
+                    string LOCA = dataitems.Rows[f][2].ToString();
+                    double LASTPUR = Convert.ToDouble(dataitems.Rows[f][4].ToString());
+                    string UNI = dataitems.Rows[f][5].ToString();
+                    double STOCK = Convert.ToDouble(dataitems.Rows[f][6].ToString());
+                    string id_type_item = dataitems.Rows[f][0].ToString();
+
+
+                    PostCargaFracttalInventoriesSan(ITEM, DESC, LOCA, UNI, LASTPUR, STOCK);
+
+                }
+
+            }
+
+        }
+
+
+
+        public static void PostCargaFracttalInventoriesSan(string Item, string Desccripcion, string Localidad, string Unidad, double Costo, double Stock)
+        {
+            Console.WriteLine("---------------- CREANDO CODIGOS NUEVOS SANTA INES ---------------------------");
+            string itemcode = Item;
+            string descripcion = Desccripcion;
+            string localidad = "S"; //"CODIGO DE UBICACION SANTA INES/
+            string unida = Unidad;
+            double costo = Costo;
+            double stock = Stock;
+
+
+
+
+            HawkCredential credential = new HawkCredential
+            {
+                Id = "TLFmgX1Kuef4rsaNxk9z",
+                Key = "0EIAQTJhtUvNqBAXkCserYjjRL7P6HP7WhIxBcf67aUynfWXrPCjyxU",
+                Algorithm = "sha256"
+            };
+
+            _credential = credential;
+
+            var client = new RestClient("https://app.fracttal.com/api/items");
+
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            Authenticate(client, request);
+            request.AddHeader("Content-Type", "application/json");
+
+
+            //-------------------------------------------------- prueba del codigo nuevo----------------------------------------
+
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddParameter("code", "S" + itemcode); //Agrega el prefijo de Macizo en el codigo
+            request.AddParameter("field_1", descripcion);
+            request.AddParameter("field_2", "S" + itemcode);//Agrega el prefijo de Macizo en el numero de parte
+            request.AddParameter("unit_description", unida);
+            request.AddParameter("code_parent_location", localidad); //codigo de la ubicacion
+            request.AddParameter("id_type_item", "4");
+            request.AddParameter("unit_code", "S" + itemcode);//Agrega el prefijo de Macizo
+            IRestResponse response = client.Execute(request);
+
+
+            //--------------------------------------------------fin prueba----------------------------------------------
+
+            //var jsonResponse = JsonConvert.DeserializeObject(response.Content);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Codigo: " + itemcode);
+            Console.WriteLine("Descripcion: " + descripcion);
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Estado: ");
+            //Console.WriteLine(jsonResponse);
+            Console.WriteLine(response.Content);
+            using (var progress = new ProgressBar())
+            {
+                for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
+                {
+                    progress.Report((double)i / 100);
+                    System.Threading.Thread.Sleep(5);
+                }
+            }
+            Console.ResetColor();
+
+
+            //var info = new System.Diagnostics.ProcessStartInfo(Environment.GetCommandLineArgs()[0]);
+            //System.Diagnostics.Process.Start(info);
+
+            //Console.ForegroundColor = ConsoleColor.Red;
+            //Console.WriteLine("--------CERRANDO CARGA DE REQUERIMIENTOS-------");
+
+
+            //Environment.Exit(0);
+
+
+
+
         }
 
         public static void PutiteSanta()
         {
+
+            using (var progress = new ProgressBar())
+            {
+                for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
+                {
+                    progress.Report((double)i / 100);
+                    System.Threading.Thread.Sleep(25);
+                }
+            }
+
+
+            DataTable dataitems = new DataTable();
+            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBSant + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+
+            // using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+            {
+                // var ArticulosMovimiento = "select  * from INVENTARIOS where Codigo between 'VARIOS1831' and 'VARIOS1906'";
+                var ArticulosMovimiento = "SELECT [ItemCode],[ItemName],[ItmsGrpNam],[CreateDate],[LastPurPrc],isnull([InvntryUom],'UN')as InvntryUom,[OnHand] FROM [dbo].[V_ArticulosNuevos]";
+
+                conexion.Open();
+                SqlDataAdapter adaptador = new SqlDataAdapter(ArticulosMovimiento, conexion);
+                adaptador.Fill(dataitems);
+            }
+
+            Console.WriteLine("CODIGOS ENCONTRADOS PARA ACTUALIZAR SANTA INES");
+
+
+            if (dataitems.Rows.Count > 0)
+            {
+                for (int f = 0; f < dataitems.Rows.Count; f++)
+                {
+                    //dt.Rows[i][0].ToString().Trim()
+                    string ITEM = dataitems.Rows[f][0].ToString();
+                    string DESC = dataitems.Rows[f][1].ToString();
+                    string LOCA = dataitems.Rows[f][2].ToString();
+                    double LASTPUR = Convert.ToDouble(dataitems.Rows[f][4].ToString());
+                    string UNI = dataitems.Rows[f][5].ToString();
+                    double STOCK = Convert.ToDouble(dataitems.Rows[f][6].ToString());
+                    //string Almacen = dataitems.Rows[f][0].ToString();
+
+
+
+                    PutCargaFracttalInventoriesSan(ITEM, DESC, LOCA, UNI, LASTPUR, STOCK /*, Almacen*/);
+
+                }
+
+            }
+
+        }
+
+
+
+        public static void PutCargaFracttalInventoriesSan(string Item, string Desccripcion, string Localidad, string Unidad, double Costo, double Stock/*, int AlmacenR*/)
+        {
+            Console.WriteLine("ACTUALIZANDO CODIGOS SANTA INES");
+            string itemcode = "S" + Item;
+            string descripcion = Desccripcion;
+            string localidad = "";
+            string unida = Unidad;
+            double costo = Costo;
+            double stock = Stock;
+            int AlmacenR = 2437;
+
+
+
+
+
+
+            HawkCredential credential = new HawkCredential
+            {
+                Id = "TLFmgX1Kuef4rsaNxk9z",
+                Key = "0EIAQTJhtUvNqBAXkCserYjjRL7P6HP7WhIxBcf67aUynfWXrPCjyxU",
+                Algorithm = "sha256"
+            };
+
+            _credential = credential;
+            //requisiciones
+            var client = new RestClient("https://app.fracttal.com/api/items/" + itemcode);
+
+
+
+            var request = new RestRequest(Method.PUT);
+
+
+            Authenticate(client, request);
+
+
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddParameter("code", itemcode); //Agrega el prefijo de Macizo en el codigo
+            request.AddParameter("field_1", descripcion);
+            request.AddParameter("field_2", itemcode);//Agrega el prefijo de Macizo en el numero de parte
+                                                      // request.AddParameter("unit_code", "M" + itemcode);//Agrega el prefijo de Macizo
+            request.AddParameter("unit_description", unida);
+            request.AddParameter("code_parent_location", localidad); //codigo de la ubicacion
+            request.AddParameter("id_type_item", "4");
+            request.AddParameter("id_warehouse", AlmacenR);//Agrega almacen santa ines
+            request.AddParameter("stock", Stock);
+            request.AddParameter("max_stock_level", "2");
+            request.AddParameter("min_stock_level", "1");
+            request.AddParameter("stock_temp", "0");
+            request.AddParameter("unit_cost_stock", costo);
+            IRestResponse response = client.Execute(request);
+
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Codigo: " + itemcode);
+            Console.WriteLine("Descripcion: " + descripcion);
+            Console.WriteLine("Codigo de la bodega de almacen: " + AlmacenR);
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Estado: ");
+            //  Console.WriteLine(jsonResponse);
+            Console.WriteLine(response.Content);
+
+            Console.ResetColor();
+
+            using (var progress = new ProgressBar())
+            {
+                for (int i = 0; i <= /*Convert.ToInt32(dt.Rows.Count)*/100; i++)
+                {
+                    progress.Report((double)i / 100);
+                    System.Threading.Thread.Sleep(15);
+                }
+            }
+
+            Console.WriteLine("End SomeMethod");
+
+
+
+
 
         }
 
@@ -447,10 +736,10 @@ namespace ProInterfaceFracttal
 
             DataTable tabla = new DataTable();
 
-            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBTran + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBTran + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
 
-            //using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=TRANSFLESA91;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+            //using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=SBO_TRANSFLESA;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
             {
                 var ArticulosMovimiento = "select top 200 * from v_ArticulosNuevos order by 4 desc";
                 conexion.Open();
@@ -562,10 +851,10 @@ namespace ProInterfaceFracttal
 
             DataTable tabla = new DataTable();
 
-            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBMaci + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBMaci + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
 
-            //using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=TRANSFLESA91;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+            //using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=SBO_TRANSFLESA;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
             {
                 var ArticulosMovimiento = "select top 200 * from v_ArticulosNuevos order by 4 desc";
                 conexion.Open();
@@ -674,9 +963,9 @@ namespace ProInterfaceFracttal
         public static void PutDatosFracttal() {
 
 
-            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBTran + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBTran + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-            //  using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=TRANSFLESA91;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+            //  using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=SBO_TRANSFLESA;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
             {
                 var ArticulosMovimiento = "select * from V_ArticulosMovimiento order by 1";
                 conexion.Open();
@@ -794,9 +1083,9 @@ namespace ProInterfaceFracttal
         {
 
 
-            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBMaci + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBMaci + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-            //  using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=TRANSFLESA91;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+            //  using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=SBO_TRANSFLESA;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
             {
                 var ArticulosMovimiento = "select * from V_ArticulosMovimiento order by 1";
                 conexion.Open();
@@ -1180,6 +1469,9 @@ namespace ProInterfaceFracttal
         public static void GetCargaFracttal() {
 
 
+            //Console.SetWindowSize(70, 20);
+            //Console.SetBufferSize(70, 20);
+
 
             Console.ForegroundColor = ConsoleColor.Magenta;
 
@@ -1200,7 +1492,7 @@ namespace ProInterfaceFracttal
             ///
             ///CAMBIAR DIA
             DateTime hoy = DateTime.Today;
-            DateTime diaini = (hoy.AddDays(-2));
+            DateTime diaini = (hoy.AddDays(-1));
             DateTime diafin = (hoy.AddDays(1));
 
 
@@ -1230,7 +1522,7 @@ namespace ProInterfaceFracttal
             //requisiciones
             var client = new RestClient("https://app.fracttal.com/api/work_orders_movements/?since=" + añoini + "-" + mesini + "-" + diai + "T00:00:00-00&until=" + añofin + "-" + mesfin + "-" + diaf + "T00:00:00-00");
             
-           // var client = new RestClient("https://app.fracttal.com/api/work_orders_movements/036603");
+          //  var client = new RestClient("https://app.fracttal.com/api/work_orders_movements/038533");
 
             var request = new RestRequest(Method.GET);
             Authenticate(client, request);
@@ -1590,9 +1882,9 @@ namespace ProInterfaceFracttal
 
                 DataTable tbcomparaenca = new DataTable();
 
-                using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+                using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-                // using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+                // using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
                 {
                     //var ArticulosMovimiento = " select distinct * from (" +
                     //    " select top 1000  t0.U_folio_source,t0.U_document1 as Document1   from " +
@@ -1699,7 +1991,7 @@ namespace ProInterfaceFracttal
 
                     DataTable dtDistinct = new DataTable();
 
-                    string[] sColumnas = { "folio_source", "date", "document1", "ItemCode", "items_description", "qty", "qty_pending", "unit_cost_company", "Completed_percentage", "code1", "personnel_description", "note", "tasks_log_task_type_main", "movements_states_description", "parent_description", /*"tasks_log_types_2_description",*/ "costs_center_description", "id_request"/*, "groups_2_description"*/, "items_log_description" };
+                    string[] sColumnas = { "folio_source", "date", "document1", "ItemCode", "items_description", "qty", "qty_pending", "unit_cost_company", "Completed_percentage", "code1", "personnel_description", "note", "tasks_log_task_type_main", "movements_states_description", "parent_description", /*"tasks_log_types_2_description",*/ "costs_center_description", "id_request", "items_log_description","groups_2_description" };
                     dtDistinct = TableC.DefaultView.ToTable(true, sColumnas);
 
 
@@ -1778,9 +2070,9 @@ namespace ProInterfaceFracttal
                     //DataTable TbtComparaRequis = new DataTable();
 
 
-                    //using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+                    //using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-                    ////using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+                    ////using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
                     //{
                     //    var Complementos = "select distinct * from (" +
                     //    " select top 1000  U_folio_source,U_document1 as Document1   from " +
@@ -2248,9 +2540,9 @@ namespace ProInterfaceFracttal
             //    Console.WriteLine(datadistintos);
             //    DataTable tbcomparaenca = new DataTable();
 
-            //    using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+            //    using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-            //    // using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+            //    // using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
             //    {
             //        var ArticulosMovimiento = " select distinct [Code],U_Document1 from [@LINEASOFRACTTAL] order by [Code] desc";
             //        conexion.Open();
@@ -2302,9 +2594,9 @@ namespace ProInterfaceFracttal
             //        DataTable TbtComparaRequis = new DataTable();
 
 
-            //        using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+            //        using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-            //        //using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+            //        //using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
             //        {
             //            var Complementos = "select distinct [U_document1]  from [@LINEASOFRACTTAL] order by 1 desc";
             //            conexion.Open();
@@ -2665,9 +2957,9 @@ namespace ProInterfaceFracttal
 
             //    DataTable tbcomparaenca = new DataTable();
 
-            //    using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+            //    using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-            //    // using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+            //    // using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
             //    {
             //        var ArticulosMovimiento = " select distinct [Code],U_Document1 from [@LINEASOFRACTTAL] order by [Code] desc";
             //        conexion.Open();
@@ -2719,9 +3011,9 @@ namespace ProInterfaceFracttal
             //        DataTable TbtComparaRequis = new DataTable();
 
 
-            //        using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+            //        using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-            //        //using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+            //        //using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
             //        {
             //            var Complementos = "select distinct [U_document1]  from [@LINEASOFRACTTAL] order by 1 desc";
             //            conexion.Open();
@@ -2794,9 +3086,9 @@ namespace ProInterfaceFracttal
         {
 
             DataTable dataitems = new DataTable();
-            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBTran + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBTran + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-            // using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+            // using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
             {
                 // var ArticulosMovimiento = "select  * from INVENTARIOS where Codigo between 'VARIOS1831' and 'VARIOS1906'";
                 var ArticulosMovimiento = "SELECT [ItemCode],[ItemName],[ItmsGrpNam],[CreateDate],[LastPurPrc],[InvntryUom] FROM [dbo].[V_ArticulosNuevos]";
@@ -2909,9 +3201,9 @@ namespace ProInterfaceFracttal
         {
 
             DataTable dataitems = new DataTable();
-            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBMaci + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBMaci + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-            // using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+            // using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
             {
                 // var ArticulosMovimiento = "select  * from INVENTARIOS where Codigo between 'VARIOS1831' and 'VARIOS1906'";
                 var ArticulosMovimiento = "SELECT [ItemCode],[ItemName],[ItmsGrpNam],[CreateDate],[LastPurPrc],[InvntryUom],[OnHand] FROM [dbo].[V_ArticulosNuevos]";
@@ -2998,9 +3290,9 @@ namespace ProInterfaceFracttal
         {
 
             DataTable dataitems = new DataTable();
-            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBSant + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBSant + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-            // using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+            // using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
             {
                 // var ArticulosMovimiento = "select  * from INVENTARIOS where Codigo between 'VARIOS1831' and 'VARIOS1906'";
                 var ArticulosMovimiento = "SELECT [ItemCode],[ItemName],[ItmsGrpNam],[CreateDate],[LastPurPrc],[InvntryUom],[OnHand] FROM [dbo].[V_ArticulosNuevos]";
@@ -3102,7 +3394,7 @@ namespace ProInterfaceFracttal
 
 
             DataTable dataitems = new DataTable();
-            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBTran + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBTran + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
                 
             {
@@ -3239,9 +3531,9 @@ namespace ProInterfaceFracttal
 
 
             DataTable dataitems = new DataTable();
-            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBTran + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBTran + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-            // using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+            // using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
             {
                 // var ArticulosMovimiento = "select  * from INVENTARIOS where Codigo between 'VARIOS1831' and 'VARIOS1906'";
                 var ArticulosMovimiento = "SELECT [ItemCode],[ItemName],[ItmsGrpNam],[CreateDate],[LastPurPrc],[InvntryUom],[OnHand] FROM [dbo].[V_ArticulosNuevos]";
@@ -3526,9 +3818,9 @@ namespace ProInterfaceFracttal
 
             //string Departamento = "14";
 
-            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-            ////using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+            ////using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
             {
                 conexion.Open();
                 //    String query = "INSERT INTO [dbo].[@ORDENESFRACTTAL]" +
@@ -3622,9 +3914,9 @@ namespace ProInterfaceFracttal
                      ",@U_completed_percenta" +
                      ",@U_code1" +
                      ",@U_personnel_descript" +
-                     ",SUBSTRING(@U_note,1, 150)" + // Rocortado a 150 caracteres 16092021
+                     ",SUBSTRING(@U_note,1, 150)" + // Rocortado a 150 caracteres 16092021                    
                      ",@U_movements_states_description " +
-                     ",@U_items_log_description )";
+                     ",SUBSTRING (@U_items_log_description,1, 50) )";
 
                 int contador2 = 0;
                 using (SqlCommand command = new SqlCommand(query2, conexion))
@@ -3708,9 +4000,9 @@ namespace ProInterfaceFracttal
 
             string Departamento = "14";
 
-            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-            //using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+            //using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
             {
                 conexion.Open();
                 String query = "INSERT INTO [dbo].[@ORDENESFRACTTAL]" +
@@ -3724,7 +4016,7 @@ namespace ProInterfaceFracttal
                     "   [U_costs_center_description], " +
                     "   [U_Department1]  " +
                     //  "   [U_id_request] " +
-                    // "   ,[U_groups_2_description] " +
+                     "   ,[U_groups_2_description] " +
                     " ) " +
                     "   VALUES( @Code, " +
                     "   @Name, " +
@@ -3736,7 +4028,7 @@ namespace ProInterfaceFracttal
                     "   @costs_center_description, " +
                     "   @Department1 " +
                     //    "   @id_request " +
-                    //  "   , @U_groups_2_description " +
+                      "   , @U_groups_2_description " +
                     " ) ";
                 int contador = 0;
                 using (SqlCommand command = new SqlCommand(query, conexion))
@@ -3756,7 +4048,7 @@ namespace ProInterfaceFracttal
                         command.Parameters.AddWithValue("@costs_center_description", dt.Rows[i][15].ToString().Trim());
                         command.Parameters.AddWithValue("@Department1", /*dt.Rows[i][17].ToString().Trim()*/Departamento.ToString().Trim());
                         //   command.Parameters.AddWithValue("@id_request", dt.Rows[i][17].ToString().Trim());
-                        //command.Parameters.AddWithValue("@U_groups_2_description", dt.Rows[i][18].ToString().Trim());
+                        command.Parameters.AddWithValue("@U_groups_2_description", dt.Rows[i][18].ToString().Trim());
 
 
 
@@ -3919,8 +4211,8 @@ namespace ProInterfaceFracttal
 
             // Init Connection Properties
             OrdenApp.oCompany.DbServerType = (SAPbobsCOM.BoDataServerTypes.dst_MSSQL2014) /*(cmbDBType.SelectedIndex + 1)*/;
-            OrdenApp.oCompany.Server = "128.0.0.4"; // change to your company server
-            OrdenApp.oCompany.LicenseServer = "128.0.0.10:30000";
+            OrdenApp.oCompany.Server = "192.168.0.4"; // change to your company server
+            OrdenApp.oCompany.LicenseServer = "192.168.0.9:30000";
             OrdenApp.oCompany.language = SAPbobsCOM.BoSuppLangs.ln_Spanish_La; // change to your language
             OrdenApp.oCompany.UseTrusted = false;
             OrdenApp.oCompany.DbUserName = /*txtDBUser.Text.ToString()*/"sa";
@@ -4048,8 +4340,8 @@ namespace ProInterfaceFracttal
 
             // Init Connection Properties
             OrdenApp.oCompany.DbServerType = (SAPbobsCOM.BoDataServerTypes.dst_MSSQL2014) /*(cmbDBType.SelectedIndex + 1)*/;
-            OrdenApp.oCompany.Server = "128.0.0.4"; // change to your company server
-            OrdenApp.oCompany.LicenseServer = "128.0.0.10:30000";
+            OrdenApp.oCompany.Server = "192.168.0.4"; // change to your company server
+            OrdenApp.oCompany.LicenseServer = "192.168.0.9:40000";
             OrdenApp.oCompany.language = SAPbobsCOM.BoSuppLangs.ln_Spanish_La; // change to your language
             OrdenApp.oCompany.UseTrusted = false;
             OrdenApp.oCompany.DbUserName = /*txtDBUser.Text.ToString()*/"sa";
@@ -4182,8 +4474,8 @@ namespace ProInterfaceFracttal
 
             // Init Connection Properties
             OrdenApp.oCompany.DbServerType = (SAPbobsCOM.BoDataServerTypes.dst_MSSQL2014) /*(cmbDBType.SelectedIndex + 1)*/;
-            OrdenApp.oCompany.Server = "128.0.0.4"; // change to your company server
-            OrdenApp.oCompany.LicenseServer = "128.0.0.10:30000";
+            OrdenApp.oCompany.Server = "192.168.0.4"; // change to your company server
+            OrdenApp.oCompany.LicenseServer = "192.168.0.9:40000";
             OrdenApp.oCompany.language = SAPbobsCOM.BoSuppLangs.ln_Spanish_La; // change to your language
             OrdenApp.oCompany.UseTrusted = false;
             OrdenApp.oCompany.DbUserName = /*txtDBUser.Text.ToString()*/"sa";
@@ -4316,10 +4608,10 @@ namespace ProInterfaceFracttal
 
             // Set connection properties
 
-            OrdenApp.oCompany.CompanyDB = ServerSqlDBTran.ToString(); /*"TRANSFLESA91".ToString()*//*cmbCompany.Text*/
+            OrdenApp.oCompany.CompanyDB = ServerSqlDBTran.ToString(); /*"SBO_TRANSFLESA".ToString()*//*cmbCompany.Text*/
             OrdenApp.oCompany.UserName = "pro3"/*txtUSer.Text*/;
             OrdenApp.oCompany.Password = "123456"/*txtPassword.Text*/;
-            OrdenApp.oCompany.LicenseServer = "128.0.0.10:30000";
+            OrdenApp.oCompany.LicenseServer = "192.168.0.9:30000";
 
             //Try to connect
             lRetCode = OrdenApp.oCompany.Connect();
@@ -4329,7 +4621,7 @@ namespace ProInterfaceFracttal
                 int temp_int = lErrCode;
                 string temp_string = sErrMsg;
                 OrdenApp.oCompany.GetLastError(out temp_int, out temp_string);
-                Console.WriteLine("Error al Conectar: " + sErrMsg);
+                Console.WriteLine("Error al Conectar: " + temp_int+ " "+ temp_string);
                 Console.WriteLine("Problemas en la conexion presiones una tecla");
                // Console.ReadKey();
 
@@ -4388,8 +4680,8 @@ namespace ProInterfaceFracttal
 
             OrdenApp.oCompany.CompanyDB = ServerSqlDBMaci.ToString()/*cmbCompany.Text*/;
             OrdenApp.oCompany.UserName = "manager"/*txtUSer.Text*/;
-            OrdenApp.oCompany.Password = "maciz0"/*txtPassword.Text*/;
-            OrdenApp.oCompany.LicenseServer = "128.0.0.10:30000";
+            OrdenApp.oCompany.Password = "4jXMwn"/*txtPassword.Text*/;
+            OrdenApp.oCompany.LicenseServer = "192.168.0.9:30000";
 
             //Try to connect
             lRetCode = OrdenApp.oCompany.Connect();
@@ -4457,8 +4749,8 @@ namespace ProInterfaceFracttal
 
             OrdenApp.oCompany.CompanyDB = ServerSqlDBSant.ToString()/*cmbCompany.Text*/;
             OrdenApp.oCompany.UserName = "manager"/*txtUSer.Text*/;
-            OrdenApp.oCompany.Password = "maciz0"/*txtPassword.Text*/;
-            OrdenApp.oCompany.LicenseServer = "128.0.0.10:30000";
+            OrdenApp.oCompany.Password = "4jXMwn"/*txtPassword.Text*/;
+            OrdenApp.oCompany.LicenseServer = "192.168.0.9:30000";
 
             //Try to connect
             lRetCode = OrdenApp.oCompany.Connect();
@@ -4536,8 +4828,23 @@ namespace ProInterfaceFracttal
 
 
         public static string TipoMantenimiento = "";
+
+
+
         public static void AddOrderToDatabase()
         {
+            
+            //Console.SetWindowSize(70, 20);
+            //Console.SetBufferSize(70, 20);
+
+            /*prueba*/
+
+            var consoleWnd = System.Diagnostics.Process.GetCurrentProcess().MainWindowHandle;
+            Imports.SetWindowPos(consoleWnd, 0, 0, 0, 0, 0, Imports.SWP_NOSIZE | Imports.SWP_NOZORDER);
+            //System.Console.ReadLine();
+
+            /*fin prueba*/
+
 
             using (var progress = new ProgressBar())
             {
@@ -4561,7 +4868,7 @@ namespace ProInterfaceFracttal
                 Requerimiento = "";
 
                 DataTable solicitudes = new DataTable();
-                using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ";Connection Timeout=100"))
+                using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ";Connection Timeout=100"))
 
 
                /*FILTRA LAS REQUISICIONES DE INSUMOS ENVIADAS DESDE FRACTTAL */
@@ -4649,9 +4956,9 @@ namespace ProInterfaceFracttal
 
 
                     DataTable Olineas = new DataTable();
-                    using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+                    using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-                    //using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+                    //using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
 
                     {
                         var LineasOrdenes = "SELECT DISTINCT  [Code]" +
@@ -4877,13 +5184,13 @@ namespace ProInterfaceFracttal
 
                 DataTable solicitudes = new DataTable();
 
-                using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+                using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-               // using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+               // using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
 
                 {
 
-                    var ArticulosMovimiento = " SELECT DISTINCT top 10 convert(nvarchar, [Code]) as code" + //0
+                    var ArticulosMovimiento = " SELECT DISTINCT top 30 convert(nvarchar, [Code]) as code" + //0
                                               ",[U_type_main]" + //1
                                               ",[U_costs_center_description]" + //2
                                               ",[U_personnel_descript]" + //3
@@ -4900,7 +5207,7 @@ namespace ProInterfaceFracttal
                                               " AND[U_parent_description] NOT LIKE ltrim(rtrim('%SANTA INES%'))" +
                                               " AND[U_ItemCode] != ''" +
                                               " AND [Code] not in ('035803','035804','035805','035806','035461','035662','035777','035787','035789')" +
-                                             // " AND [Code] = '036502' " +
+                                             // " AND [Code] = '038533' " +
                                               " order by 1 desc";
 
                     //var ArticulosMovimiento = " SELECT DISTINCT  convert(nvarchar, [Code]) as code ,[U_type_main]  FROM[dbo].[@ORDENESFRACTTAL] where[Code] not in (Select NumAtCard COLLATE SQL_Latin1_General_CP1_CI_AS FROM ODRF23 WHERE NumAtCard IS NOT NULL and NumAtCard <> '' )   group by [code],[U_type_main]  order by [code] desc";
@@ -4975,9 +5282,9 @@ namespace ProInterfaceFracttal
                     DataTable Olineas = new DataTable();
 
 
-                    using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+                    using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-//                    using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+//                    using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
 
                     {
                         var LineasOrdenes = " SELECT  [Code] " +
@@ -5219,15 +5526,15 @@ namespace ProInterfaceFracttal
 
                 DataTable solicitudes = new DataTable();
 
-                using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+                using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-                // using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+                // using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
 
                 {
 
                     var ArticulosMovimiento = "SELECT  DISTINCT  convert(nvarchar, [Code]) as code " +
                         ",[U_type_main] FROM [DB_INTERFACE].[dbo].[ORDENESFRACTTAL] " +
-                        "WHERE[U_parent_description]  LIKE ltrim(rtrim('%MACIZO MANTENIMIENTO%') ) " +
+                        "WHERE code = '036742' and [U_parent_description]  LIKE ltrim(rtrim('%MACIZO MANTENIMIENTO%') ) " +
                         "AND [U_parent_description]  LIKE ltrim(rtrim('%SANTA INES%') ) " +
                         "AND [U_ItemCode] != ''    order by 1 desc";
 
@@ -5298,9 +5605,9 @@ namespace ProInterfaceFracttal
                     DataTable Olineas = new DataTable();
 
 
-                    using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+                    using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-                    //                    using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+                    //                    using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
 
                     {
                         var LineasOrdenes = " SELECT  [Code] " +
@@ -5499,9 +5806,9 @@ namespace ProInterfaceFracttal
             DataTable solicitudes = new DataTable();
 
 
-            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-//            using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+//            using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
 
             {
                 var ArticulosMovimiento = " select * from (SELECT distinct  t0.[U_folio_source]" +
@@ -5563,9 +5870,9 @@ namespace ProInterfaceFracttal
                 DataTable Olineas = new DataTable();
 
 
-                using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+                using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-//                using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+//                using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
 
                 {
                     var LineasOrdenesC = "SELECT DISTINCT  [Code]" +
@@ -5720,9 +6027,9 @@ namespace ProInterfaceFracttal
             DataTable solicitudes = new DataTable();
 
 
-            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-            //            using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+            //            using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
 
             {
                 var ArticulosMovimiento = "SELECT distinct  t0.[U_folio_source]" +
@@ -5784,9 +6091,9 @@ namespace ProInterfaceFracttal
                 DataTable Olineas = new DataTable();
 
 
-                using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+                using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-                //                using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+                //                using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
 
                 {
                     var LineasOrdenesC = "SELECT DISTINCT  [Code]" +
@@ -5933,9 +6240,9 @@ namespace ProInterfaceFracttal
             DataTable solicitudes = new DataTable();
 
 
-            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-            //            using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+            //            using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
 
             {
                 var ArticulosMovimiento = "SELECT distinct  t0.[U_folio_source]" +
@@ -6000,9 +6307,9 @@ namespace ProInterfaceFracttal
                 DataTable Olineas = new DataTable();
 
 
-                using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+                using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-                //                using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+                //                using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
 
                 {
                     var LineasOrdenesC = "SELECT DISTINCT  [Code]" +
@@ -6158,10 +6465,10 @@ namespace ProInterfaceFracttal
 
                 DataTable solicitudes = new DataTable();
 
-                using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+                using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
 
-                //using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+                //using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
 
                 {
                     var ArticulosMovimiento = "Select  Distinct top 30 [NumAtCard]" +
@@ -6239,9 +6546,9 @@ namespace ProInterfaceFracttal
 
 
                     DataTable OlineasR = new DataTable();
-                    using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+                    using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-                    // using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+                    // using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
 
                     {
                         var LineasRequis = "SELECT tx.[Code]" +
@@ -6440,10 +6747,10 @@ namespace ProInterfaceFracttal
 
                 DataTable solicitudes = new DataTable();
 
-                using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+                using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
 
-                //using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+                //using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
 
                 {
                     var ArticulosMovimiento = "SELECT distinct t0.[Code] , t0.U_code1 FROM[DB_INTERFACE].[dbo].[V_CARGACOMPRASMACIZO] t0 where t0.U_Date BETWEEN convert(nvarchar, DATEADD(DAY,-60, GETDATE())) and convert(nvarchar,GETDATE())  order by [Code] desc ";
@@ -6501,9 +6808,9 @@ namespace ProInterfaceFracttal
 
 
                     DataTable OlineasR = new DataTable();
-                    using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+                    using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-                    // using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+                    // using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
 
                     {
                         var LineasRequis = "SELECT tx.[Code]" +
@@ -6522,7 +6829,7 @@ namespace ProInterfaceFracttal
                             ",isnull(REPLACE(SUBSTRING(tx.[U_type_main],1,1),'M','X'),'-')" +
                             "FROM [dbo].[V_LineasNoexistencia2] tx where tx.[Code] = " + DocNumOrders.ToString() +
                             " and tx.[U_document1] not in (select  X.U_Numero_Doc COLLATE SQL_Latin1_General_CP1_CI_AS " +
-                            " from INVERFFACSA91.dbo.PRQ1 X where x.U_Numero_Doc  COLLATE SQL_Latin1_General_CP1_CI_AS = tx.[U_document1] ) order by 1 desc ";
+                            " from SBO_MACIZO.dbo.PRQ1 X where x.U_Numero_Doc  COLLATE SQL_Latin1_General_CP1_CI_AS = tx.[U_document1] ) order by 1 desc ";
                         conexion.Open();
                         SqlDataAdapter adaptador = new SqlDataAdapter(LineasRequis, conexion);
                         adaptador.Fill(OlineasR);
@@ -6659,10 +6966,10 @@ namespace ProInterfaceFracttal
 
             DataTable solicitudes = new DataTable();
 
-            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
 
-            //using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+            //using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
 
             {
                 var ArticulosMovimiento = "SELECT t0.[Code], t0.U_code1 FROM[DB_INTERFACE].[dbo].[V_CARGAMANTINDUSTRIALSANTA] t0 order by[Code] desc";
@@ -6720,9 +7027,9 @@ namespace ProInterfaceFracttal
 
 
                 DataTable OlineasR = new DataTable();
-                using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+                using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBINTER + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-                // using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+                // using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
 
                 {
                     var LineasRequis = "SELECT tx.[Code]" +
@@ -6874,7 +7181,7 @@ namespace ProInterfaceFracttal
         //        //Consultando las ordenes registradas para iniciar en enviarlas a SAP
 
         //        DataTable solicitudes = new DataTable();
-        //        using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+        //        using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
 
         //        {
         //            var ArticulosMovimiento = "SELECT DISTINCT [Code] FROM [DB_INTERFACE].[dbo].[COMPLEMENTOS]";
@@ -6920,7 +7227,7 @@ namespace ProInterfaceFracttal
 
         //            DataTable OlineasR = new DataTable();
 
-        //            using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+        //            using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=DB_INTERFACE;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
 
         //            {
         //                var LineasRequis = "SELECT tx.[Code]" +
@@ -6939,7 +7246,7 @@ namespace ProInterfaceFracttal
         //                    ",isnull(REPLACE(SUBSTRING(tx.[U_type_main],1,1),'M','X'),'-')" +
         //                    "FROM [dbo].[V_LineasNoexistencia] tx where tx.[Code] = " + DocNumOrders.ToString() +
         //                    " and tx.[U_document1] not in (select  X.U_Numero_Doc COLLATE SQL_Latin1_General_CP1_CI_AS " +
-        //                    " from TRANSFLESA91.dbo.PRQ1 X where x.U_Numero_Doc  COLLATE SQL_Latin1_General_CP1_CI_AS = tx.[U_document1] ) and [U_type_main] not in ('Mantenimiento Preventivo') ";
+        //                    " from SBO_TRANSFLESA.dbo.PRQ1 X where x.U_Numero_Doc  COLLATE SQL_Latin1_General_CP1_CI_AS = tx.[U_document1] ) and [U_type_main] not in ('Mantenimiento Preventivo') ";
         //                conexion.Open();
         //                SqlDataAdapter adaptador = new SqlDataAdapter(LineasRequis, conexion);
         //                adaptador.Fill(OlineasR);
@@ -7093,14 +7400,14 @@ namespace ProInterfaceFracttal
             Console.WriteLine("----------------LOGISTICA-----------------");
             Console.WriteLine("--------------------------------------------");
             DataTable tabla = new DataTable();
-            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*128.0.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBTran + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
+            using (SqlConnection conexion = new SqlConnection("Data Source=" + IpServerSql/*192.168.0.4*/+ ";Initial Catalog=" +/*DB_INTERFACE*/ServerSqlDBTran + ";Persist Security Info=True;User ID=" +/*sa-*/ServerSqlUser + ";Password=" + ServerSqlPass + ""))
 
-           // using (SqlConnection conexion = new SqlConnection("Data Source=128.0.0.4;Initial Catalog=TRANSFLESA91;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
+           // using (SqlConnection conexion = new SqlConnection("Data Source=192.168.0.4;Initial Catalog=SBO_TRANSFLESA;Persist Security Info=True;User ID=sa;Password=Ceo2015*"))
             {
 
 
 
-                var DrftsAutorizadas = "select distinct T0.DocEntry, T0.DocDate, DocNum, T0.NumatCard,  T0.WddStatus from ODRF T0 where T0.DocStatus = 'O' and T0.ObjType = '23' and T0.WddStatus in ('Y') and (T0.DocDate >= CONVERT(nvarchar, DATEADD(day, - 20, GETDATE()))) ";
+                var DrftsAutorizadas = "select distinct T0.DocEntry, T0.DocDate, DocNum, T0.NumatCard,  T0.WddStatus from ODRF T0 where T0.DocStatus = 'O' and T0.ObjType = '23' and T0.WddStatus in ('Y') and (T0.DocDate >= CONVERT(nvarchar, DATEADD(day, - 50, GETDATE()))) ";
                 conexion.Open();
                 SqlDataAdapter adaptador = new SqlDataAdapter(DrftsAutorizadas, conexion);
                 adaptador.Fill(tabla);
